@@ -1,12 +1,11 @@
 DJ Fiesta TOYfeliz50xavy
-Versión 3
+Versión 4
 
 Incluye:
 
 //////////////////////////////////////////////////
-MEJORAS
+NUEVAS FUNCIONES
 //////////////////////////////////////////////////
 
-* Solución de error 153 de API de Youtube
-* Reproducción de lista de videos del M1
-* Cambio de Momentos
+* Menús Interactivos para Karaoke y Coreo
+* Listas completas de videos para cada Momento

@@ -28,8 +28,8 @@ body, html {
     min-height: 56.25vw;
     min-width: 177.78vh;
     min-height: 100vh;
-    opacity: 1; 
-    z-index: 5;
+    opacity: 1; /* Transparencia eliminada para mejor calidad de video */
+    z-index: 5; /* Por debajo de la interfaz (z-index: 10) */
 }
 
 /* --- CONTENEDOR DE GRÁFICOS --- */
@@ -39,7 +39,7 @@ body, html {
     left: 0;
     width: 100vw;
     height: 100vh;
-    pointer-events: none;
+    pointer-events: none; /* Permite hacer clic a través de esta capa (excepto el menú) */
     z-index: 10;
 }
 
@@ -92,33 +92,28 @@ body, html {
 }
 
 
-/* --- VISUALIZADOR (¡AHORA A TODO EL ANCHO DE LA PANTALLA!) --- */
+/* --- VISUALIZADOR (A TODO EL ANCHO) --- */
 .visualizer-container {
     position: absolute;
-    bottom: 20px; /* Separación del borde inferior */
+    bottom: 20px; 
     left: 0;
-    
-    width: 100vw; /* <-- ¡CAMBIO CLAVE! Cubre todo el ancho */
-    transform: none; /* <-- Eliminamos el translateX(-50%) */
-    
+    width: 100vw; 
+    transform: none; 
     height: 80px;
     display: flex;
-    justify-content: space-between; /* Distribución uniforme */
+    justify-content: space-between; 
     align-items: flex-end;
-    
     z-index: 16;
     opacity: 0.7;
     pointer-events: none;
-    
-    /* Pequeño padding a los lados para que no se pegue */
     padding: 0 5%; 
     box-sizing: border-box; 
 }
 
 .visualizer-bar {
-    width: 0.8%; /* <-- Nueva regla para que se ajusten 50 barras al 100% de ancho */
-    background: linear-gradient(to top, #00BFFF, #8A2BE2); /* Azul Neón a Púrpura */
-    margin: 0 1px; /* Margen muy pequeño */
+    width: 0.8%; 
+    background: linear-gradient(to top, #00BFFF, #8A2BE2); 
+    margin: 0 1px; 
     animation: visualize 1s ease-out infinite alternate;
 }
 
@@ -170,4 +165,71 @@ body, html {
     z-index: 99999;
     opacity: 1;
     transition: opacity 0.5s ease-out;
+}
+
+/* --- ESTILOS PARA EL SELECTOR DE MENÚ INTERACTIVO (KARAOKE/COREO) --- */
+.selector-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 20, 40, 0.95); 
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 100; 
+    
+    /* Estado inicial: Oculto */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.selector-menu.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.selector-menu h2 {
+    font-family: 'Bangers', cursive;
+    font-size: 3em;
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px #00BFFF; /* Color Azul Buzz Lightyear */
+}
+
+.video-list-container {
+    max-height: 70%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 80%;
+    max-width: 600px;
+}
+
+.menu-button {
+    background-color: #007bff; 
+    color: white;
+    border: 3px solid #ffde00; 
+    padding: 15px 20px;
+    font-family: sans-serif; /* Usamos una fuente legible para el menú */
+    font-size: 1.5em;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.2s, transform 0.1s;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.menu-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }

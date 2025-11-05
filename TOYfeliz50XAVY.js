@@ -4,11 +4,13 @@ let currentMomentKey = null;
 let partyStarted = false; // Bandera para controlar que la fiesta solo inicie una vez
 
 // Video de 1 segundo para obtener permiso de Autoplay (ID de YouTube muy corto)
-const DUMMY_VIDEO_ID = '9bZkp7q19f0'; 
+const DUMMY_VIDEO_ID = '9bZkp7q19f0'; // PSY - GANGNAM STYLE
 
 // --- ¡LISTAS DE VIDEOS ASIGNADAS A CADA MOMENTO! ---
+// Los momentos interactivos (Karaoke, Coreo) deben tener la estructura { title, id }
+
 const partyMoments = {
-    'recepcion': {  // Tecla 1: Contiene todos los videos
+    'recepcion': {  // Tecla 1: El momento que inicia y reproduce una lista automática
         title: "Llamada a la Misión", 
         videos: [
             'Xq-eunLqtfU', '0CjSIG-E0-s', 'ODYOJpIkx3c', 'zhqqcNafowU', 'GEDPLm5xX6s', '5wnPbzUL65Q',
@@ -21,35 +23,62 @@ const partyMoments = {
             'JecFxU07Qiw'
         ] 
     },
-    'disfraces': {  // Tecla 2
+    'disfraces': {  // Tecla 2: Momento de lista (vacío)
         title: "Desfile de Juguetes", 
         videos: [] 
     },
-    'karaoke': {  // Tecla 3
+    'karaoke': {  // Tecla 3: Momento INTERACTIVO de Concurso Karaoke
         title: "Micrófono de Woody", 
-        videos: [] 
+        videos: [
+            { title: "(Karaoke 1) Toy Story - Yo soy tu amigo fiel", id: "tpokwJUUGaA" },
+            { title: "(Karaoke 2) Los Palmera - Bombón Asesino", id: "t_WzCfsgkG0" }, // elegido por Ro
+            { title: "(Karaoke 3 - Dúo) Shakira y Alejandro Sans - La Tortura", id: "FynXV_rvm6M" }, // elegido por Sil
+            { title: "(Karaoke 4) Luis Miguel - Ahora Te Puedes Marchar", id: "cCvwZVKXu1g" }, // elegido por Pao
+            { title: "(Karaoke 5) Los Auténticos Decadentes - La Guitarra", id: "iqizT6ZrkkQ" },
+            { title: "(Karaoke 6) Soda Stereo - Persiana Americana", id: "OkuMgOdVwUk" },
+            { title: "(Karaoke 7) Celia Cruz - La vida es un carnaval", id: "t6x1twY6gdc" }, // elegido por Ro
+            { title: "(Karaoke 8) Miranda - Don (si, el de la guitarra de Lolo)", id: "IcWN02o4ul4" },
+            { title: "(Karaoke 9) Rafaga - Una Cerveza", id: "pZpG7ysTreU" }, // elegido por Ro
+            { title: "(Karaoke 10) Los Abuelos de la Nada - Mil Horas", id: "9CT7_sdf17I" },
+        ]
     },
-    'torta': {  // Tecla 4
+    'torta': {  // Tecla 4: Momento de soplar velas y brindis
         title: "¡Al Infinito y Más Allá!", 
-        videos: [] 
+        videos: ['D7UU6wNTzCU', 'DQd_Ivrt7u4'] 
     },
-    'coreo': {  // Tecla 5
+    'coreo': {  // Tecla 5: Momento INTERACTIVO de Concurso Coreo
         title: "Despegue Estelar", 
-        videos: [] 
+        videos: [
+            { title: "(Coreo 1) PSY - Gangman Style", id: "9bZkp7q19f0" }, // elegido por Sil
+            { title: "(Córeo 2) Las Ketchup - Aserejé", id: "arZZw8NyPq8" }, // elegido por Mumy
+            { title: "(Córeo 3) Chayanne - Provócame", id: "sOVQwlI_cks" },
+            { title: "(Córeo 4) Don Omar - Danza Kuduro", id: "yRl4hJopuwU" },
+            { title: "(Córeo 5) Los Del Río - Macarena", id: "0xv8z2tevxA" }, // elegido por Pao
+            { title: "(Córeo 6) Village People - YMCA", id: "CS9OO0S5w2k" },
+            { title: "(Córeo 7) Beyoncé - Crazy In Love", id: "JptwkEhdNfY" }, // elegido por Mumy
+            { title: "(Córeo 8) Henry Mendez - El Tiburón", id: "8QUOftzki2Y" },
+            { title: "(Córeo 9) Chocolate - Mayonesa", id: "T6NhuWYnxW0" }, // elegido por Mumy
+            { title: "(Córeo 10) Luis Miguel - Será Que No Me Amas", id: "PJTYAtrnXKs" },
+        ] 
     },
-    'cotillon': {  // Tecla 6
+    'cotillon': {  // Tecla 6: Momento de Fiesta Carioca
         title: "Descontrol de la Misión", 
-        videos: [] 
+        videos: [
+            'XNnKMt0EynA', 'Y4zJkOirldI', 'Oc40w_LiZRc', '3eqsSoPPz4g', 'ktxJZE-F5xs',
+            '-_D1TMxDbDE', 'e_OIqQo58y8', '5-EuMi9-nSw', 'KFJu1m7gjKc',
+            '1rmwV8EZGng', 'U6SdrI6tzxY',
+        ]
     },
     'despedida': {  // Tecla 7
         title: "Misión Cumplida", 
-        videos: [] 
+        videos: ['CSySKnDKDuw'] 
     },
     'fin': {  // Tecla 8
         title: "Estación Cerrada", 
         videos: [] 
     }
 };
+
 
 // 1. Carga la API de YouTube
 function onYouTubeIframeAPIReady() {
@@ -76,13 +105,24 @@ function onYouTubeIframeAPIReady() {
 // 2. Se llama cuando el reproductor está listo
 function onPlayerReady(event) {
     event.target.mute(); // Silencia en espera del clic
-    // La lógica del clic se maneja en el listener de 'load'
+    // La lógica de inicio se maneja en el listener de 'click' en el DOM
 }
 
 // 3. Controla el estado del reproductor (CLAVE DE LA SINCRONIZACIÓN)
 function onPlayerStateChange(event) {
+    // Si el estado es PLAYING (1) o BUFFERING (3), el video está cargado y listo.
     if (event.data === YT.PlayerState.PLAYING || event.data === YT.PlayerState.BUFFERING) {
         player.unMute();
+    }
+    
+    // Si el estado es ENDED (0) y estamos en Karaoke o Coreo, volvemos al menú.
+    if (event.data === YT.PlayerState.ENDED) {
+        if (currentMomentKey === 'karaoke' || currentMomentKey === 'coreo') {
+            player.stopVideo();
+            // ¡Llamamos al menú interactivo!
+            displaySelectionMenu(partyMoments[currentMomentKey]);
+            document.body.focus(); 
+        }
     }
 }
 
@@ -106,7 +146,7 @@ function applyTransitionEffect(callback) {
     warpOverlay.classList.add('active');
     
     setTimeout(() => {
-        callback(); // Carga el nuevo contenido
+        callback(); 
     }, 300);
     
     setTimeout(() => {
@@ -114,35 +154,47 @@ function applyTransitionEffect(callback) {
     }, 1000);
 }
 
-
 // 6. Función principal para Cargar Momentos
 function loadMoment(key) {
-    // Si el momento es el mismo o no existe, salimos.
     if (!partyMoments[key] || key === currentMomentKey) return; 
 
     showMomentTitle(partyMoments[key].title);
     
+    // CORRECCIÓN FINAL DE FOCO: Programamos el foco para después de la transición
+    // y antes de la acción del teclado para garantizar que funcione.
     setTimeout(() => {
         document.body.focus(); 
-        console.log("Foco devuelto al cuerpo del documento. Teclas numéricas activas.");
     }, 1100); 
 
-    
     applyTransitionEffect(() => {
         currentMomentKey = key;
         const moment = partyMoments[key];
+        const menuElement = document.getElementById('selector-menu');
 
+        // Lógica de FIN
         if (key === 'fin') {
-            // Lógica de FIN
             player.stopVideo();
             document.getElementById('player').style.display = 'none';
+            menuElement.classList.remove('active');
             return;
         }
 
-        // ¡VERIFICACIÓN DE LA LISTA CORREGIDA!
+        // Lógica de KARAOKE/COREO (INTERACTIVO)
+        if (key === 'karaoke' || key === 'coreo') {
+            player.stopVideo();
+            displaySelectionMenu(moment); // Muestra el menú y detiene el código aquí
+            return;
+        }
+        
+        // Si no es interactivo, ocultamos el menú
+        menuElement.classList.remove('active');
+
+
+        // Lógica de RECEPCIÓN/LISTA AUTOMÁTICA
         if (moment.videos && moment.videos.length > 0) {
             document.getElementById('player').style.display = 'block';
             
+            // Carga la lista de videos (automática)
             player.loadPlaylist({
                 playlist: moment.videos,
                 index: 0,
@@ -152,7 +204,7 @@ function loadMoment(key) {
             player.playVideo(); 
             
         } else {
-            // Si la lista está vacía, detenemos el reproductor.
+            // Si la lista está vacía
             player.stopVideo();
             document.getElementById('player').style.display = 'none';
             console.warn(`AVISO: La lista de videos para el momento "${moment.title}" está vacía.`);
@@ -179,34 +231,44 @@ function showMomentTitle(title) {
     }
 }
 
-
-// --- LÓGICA CENTRAL DE INICIO DE LA FIESTA ---
-// Separada para ser llamada solo tras el clic y asegurar el permiso de play.
-function startThePartyLogic(overlay) {
-    if (partyStarted) return; 
+// 8. FUNCIÓN NUEVA: Genera el menú interactivo para Karaoke/Coreo
+function displaySelectionMenu(moment) {
+    document.getElementById('player').style.display = 'none';
+    const menuElement = document.getElementById('selector-menu');
+    const container = document.getElementById('video-list-container');
     
-    // 1. TRUCO DE PERMISO: Forzamos la reproducción y pausa inmediata
+    // Limpia el menú anterior
+    container.innerHTML = ''; 
+    menuElement.querySelector('h2').textContent = `Selecciona tu Misión: ${moment.title}`;
+    
+    moment.videos.forEach(video => {
+        const button = document.createElement('button');
+        button.className = 'menu-button';
+        button.textContent = video.title;
+        
+        // El clic del botón llama a la reproducción individual y oculta el menú
+        button.onclick = () => {
+            loadSingleVideo(video.id); // Llama a la nueva función
+            menuElement.classList.remove('active');
+        };
+        container.appendChild(button);
+    });
+
+    menuElement.classList.add('active');
+}
+
+// 9. FUNCIÓN NUEVA: Reproduce un video individual (sin lista)
+function loadSingleVideo(videoId) {
+    document.getElementById('player').style.display = 'block';
     player.unMute();
-    player.loadVideoById(DUMMY_VIDEO_ID);
-    player.playVideo(); 
-    player.pauseVideo(); 
-    
-    // 2. Quitamos el overlay
-    overlay.style.opacity = '0';
-    setTimeout(() => { overlay.style.display = 'none'; }, 500);
-
-    // 3. Cargamos el contenido real con un pequeño retraso
-    setTimeout(() => {
-        partyStarted = true; // Establecer bandera DESPUÉS de dar el permiso
-        document.body.focus(); // Aseguramos el foco para el teclado
-        loadMoment('recepcion');
-    }, 100); 
+    // Usamos loadVideoById porque es un solo video, no una playlist
+    player.loadVideoById(videoId, 0, 'hd1080');
 }
 
 
-// 8. EJECUCIÓN DEL SCRIPT
+// --- INICIO DE LA APLICACIÓN ---
 window.addEventListener('load', () => {
-    // 1. Inicializa el botón de inicio (ahora llama a la lógica de forma robusta)
+    // 1. Inicializa el botón de inicio
     const overlay = document.getElementById('start-overlay');
     if (overlay) {
         overlay.addEventListener('click', () => {
@@ -222,7 +284,30 @@ window.addEventListener('load', () => {
 });
 
 
-// --- EFECTOS VISUALES (Optimizados) ---
+// --- LÓGICA CENTRAL DE INICIO DE LA FIESTA (Disparada por el clic) ---
+function startThePartyLogic(overlay) {
+    if (partyStarted) return; 
+    
+    // 1. TRUCO DE PERMISO: Forzamos la reproducción y pausa inmediata
+    player.unMute();
+    player.loadVideoById(DUMMY_VIDEO_ID);
+    player.playVideo(); 
+    player.pauseVideo(); 
+    
+    // 2. Quitamos el overlay
+    overlay.style.opacity = '0';
+    setTimeout(() => { overlay.style.display = 'none'; }, 500);
+
+    // 3. Cargamos el contenido real con un pequeño retraso
+    setTimeout(() => {
+        partyStarted = true; 
+        document.body.focus(); 
+        loadMoment('recepcion');
+    }, 100); 
+}
+
+
+// --- EFECTOS VISUALES ---
 
 // Generar barras del visualizador
 const visualizerContainer = document.querySelector('.visualizer-container');
