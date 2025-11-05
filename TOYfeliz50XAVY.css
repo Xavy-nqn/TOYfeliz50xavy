@@ -1,0 +1,173 @@
+/* --- CONFIGURACIÓN BÁSICA --- */
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    overflow: hidden;
+    cursor: none;
+    color: white;
+}
+
+/* --- CONTENEDOR PRINCIPAL Y FONDO --- */
+#player-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #4A007D 0%, #8A2BE2 100%);
+}
+
+
+/* --- REPRODUCTOR DE VIDEO --- */
+#player {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100vw; 
+    min-height: 56.25vw;
+    min-width: 177.78vh;
+    min-height: 100vh;
+    opacity: 1; 
+    z-index: 5;
+}
+
+/* --- CONTENEDOR DE GRÁFICOS --- */
+#overlay-graphics {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* --- ELEMENTOS DE LA FIESTA (LOGO Y HASHTAG) --- */
+.party-logo {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    width: 450px;
+    opacity: 0.9;
+    z-index: 20;
+}
+
+.hashtag {
+    position: absolute;
+    bottom: 30px;
+    right: 40px;
+    font-family: 'Bangers', cursive; 
+    font-size: 60px;
+    color: #FFFF00;
+    text-shadow: 3px 3px 0px #0000AA, -3px -3px 0px #0000AA, 3px -3px 0px #0000AA, -3px 3px 0px #0000AA, 4px 4px 5px rgba(0,0,0,0.5);
+    z-index: 20;
+    animation: hashtag-glow 3s infinite ease-in-out;
+}
+
+@keyframes hashtag-glow {
+    0%, 100% { text-shadow: 3px 3px 0px #0000AA, -3px -3px 0px #0000AA, 3px -3px 0px #0000AA, -3px 3px 0px #0000AA, 4px 4px 5px rgba(0,0,0,0.5); }
+    50% { text-shadow: 3px 3px 0px #8A2BE2, -3px -3px 0px #8A2BE2, 3px -3px 0px #8A2BE2, -3px 3px 0px #8A2BE2, 0 0 25px #FFFFFF, 4px 4px 10px rgba(0,0,0,0.5); }
+}
+
+/* --- TRANSICIÓN "WARP" --- */
+#warp-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0) 0%, #4A007D 60%, black 100%);
+    opacity: 0;
+    transform: scale(0);
+    border-radius: 50%;
+    z-index: 100;
+    transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+#warp-overlay.active {
+    opacity: 1;
+    transform: scale(3);
+    border-radius: 0;
+}
+
+
+/* --- VISUALIZADOR (¡AHORA A TODO EL ANCHO DE LA PANTALLA!) --- */
+.visualizer-container {
+    position: absolute;
+    bottom: 20px; /* Separación del borde inferior */
+    left: 0;
+    
+    width: 100vw; /* <-- ¡CAMBIO CLAVE! Cubre todo el ancho */
+    transform: none; /* <-- Eliminamos el translateX(-50%) */
+    
+    height: 80px;
+    display: flex;
+    justify-content: space-between; /* Distribución uniforme */
+    align-items: flex-end;
+    
+    z-index: 16;
+    opacity: 0.7;
+    pointer-events: none;
+    
+    /* Pequeño padding a los lados para que no se pegue */
+    padding: 0 5%; 
+    box-sizing: border-box; 
+}
+
+.visualizer-bar {
+    width: 0.8%; /* <-- Nueva regla para que se ajusten 50 barras al 100% de ancho */
+    background: linear-gradient(to top, #00BFFF, #8A2BE2); /* Azul Neón a Púrpura */
+    margin: 0 1px; /* Margen muy pequeño */
+    animation: visualize 1s ease-out infinite alternate;
+}
+
+@keyframes visualize {
+    0% { height: 10%; }
+    50% { height: 80%; }
+    100% { height: 30%; }
+}
+
+
+/* --- TÍTULO DEL MOMENTO --- */
+#moment-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bangers', cursive;
+    font-size: 140px;
+    text-align: center;
+    line-height: 1.1;
+    color: #FFFF00;
+    text-shadow: 5px 5px 0px #0000AA, -5px -5px 0px #0000AA, 5px -5px 0px #0000AA, -5px 5px 0px #0000AA, 8px 8px 10px rgba(0,0,0,0.5);
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#moment-title.visible {
+    opacity: 1;
+}
+
+/* --- PANTALLA DE INICIO --- */
+#start-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle, #4A007D 0%, #000000 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Bangers', cursive;
+    font-size: 80px;
+    color: #FFFF00;
+    text-shadow: 3px 3px 0px #0000AA, -3px -3px 0px #0000AA, 3px -3px 0px #0000AA, -3px 3px 0px #0000AA, 4px 4px 5px rgba(0,0,0,0.5);
+    cursor: pointer;
+    z-index: 99999;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
