@@ -1,5 +1,5 @@
 DJ Fiesta TOYfeliz50xavy
-Versión 6
+Versión 7
 
 Incluye:
 
@@ -9,39 +9,29 @@ FUNCIONES
 
 * Menús Interactivos para Karaoke y Coreo
 * Listas completas de videos para cada Momento
+* Mix de mezca con 2 bandejas reproductoras
 
 
 
 //////////////////////////////////////////////////
-MEJORAS ESTRUCTURALES (index.html v6.0)
+MEJORAS ESTRUCTURALES (index.html v7.0)
 //////////////////////////////////////////////////
-* Nuevos Encabezados y Pie
+* Nuevas Bandejas de Mix
 
-
-
-
-//////////////////////////////////////////////////
-MEJORAS ESTÉTICAS (TOYfeliz50xavy.css v6.0)
-//////////////////////////////////////////////////
-
-* Nuevo Encabezado con XAVY BUZZ + LOGO FIESTA y fondo sólido
-* Nuevo Pie con nuevos colores de Barras de Música
-* Nuevo Mix de Videos
-* Nuevos estilos de botones de lista de videos (Karaoke y Coreos)
 
 
 
 //////////////////////////////////////////////////
-MEJORAS FUNCIONES (TOYfeliz50xavy.js v6.1)
+MEJORAS ESTÉTICAS (TOYfeliz50xavy.css v7.0)
 //////////////////////////////////////////////////
 
-* Actualización de cronología de Momentos:
-- [tecla "1"] M1: Recepción
-- [tecla "2"] M2: Concurso Disfraces
-- [tecla "3"] M3: Torta - Brindis
-- [tecla "4"] M4: Concurso Karaoke
-- [tecla "5"] M5: Concurso Coreo
-- [tecla "6"] M6: Baile Carioca
-- [tecla "7"] M7: Despedida
-- [tecla "8"] M8: Fin de Misión
-* Nuevo Mix de Videos
+* Nuevo Mix de Videos de 2 bandejas
+
+
+
+//////////////////////////////////////////////////
+MEJORAS FUNCIONES (TOYfeliz50xavy.js v7.0)
+//////////////////////////////////////////////////
+
+* Nuevo Mix de Videos con 2 bandejas
+* Precarga del video siguiente a la mitad de la reproducción del actual 

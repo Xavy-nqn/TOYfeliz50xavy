@@ -2,23 +2,23 @@
 // Lógica de funciones para DJ de Momentos de la fiesta
 //
 // :: TOYfeliz50XAVY.js
-// :: versión 6.4
+// :: versión 7.0
 // :: 12 11 25
 // :: Javier Prior
-
-// Chequeo carga JS
-console.log("TOYfeliz50XAVY.js Script Cargado y Ejecutado.");
 
 // --- VARIABLES GLOBALES ---
 let playerA; // Deck A: Reproductor físico 1
 let playerB; // Deck B: Reproductor físico 2
-let currentDeck; // Referencia al DECK que está SONANDO y VISIBLE (playerA o playerB)
-let standbyDeck; // Referencia al DECK que está en ESPERA y CARGANDO (playerB o playerA)
+let currentDeck; // Referencia al DECK que está SONANDO y VISIBLE
+let standbyDeck; // Referencia al DECK que está en ESPERA y CARGANDO
 
 let currentMomentKey = null;
-let partyStarted = false; // Bandera para controlar que la fiesta solo inicie una vez
-let mixingMonitorInterval; // Variable para controlar el intervalo de monitoreo
-const MIX_DURATION = 10; // Duración de la mezcla en segundos (10s)
+let partyStarted = false; 
+let mixingMonitorInterval; 
+
+const MIX_DURATION = 20; // Duración del crossfade en segundos (20s)
+const START_LOAD_PERCENT = 0.5; // Inicia la carga del siguiente video a la mitad (50%)
+const MIX_START_TIME = 20; // Inicia el crossfade a 20s del final
 
 // Video de 1 segundo para obtener permiso de Autoplay (ID de YouTube muy corto)
 const DUMMY_VIDEO_ID = 'CSySKnDKDuw'; 
@@ -26,7 +26,7 @@ const DUMMY_VIDEO_ID = 'CSySKnDKDuw';
 
 // --- ¡LISTAS DE VIDEOS ASIGNADAS A CADA MOMENTO! ---
 const partyMoments = {
-    'recepcion': {  // Tecla 1: El momento que inicia y reproduce una lista automática (con DJ Mix)
+    'recepcion': {  // Tecla 1: Con DJ Mix
         title: "Llamada a la Misión", 
         videos: [
             'Xq-eunLqtfU', '0CjSIG-E0-s', 'ODYOJpIkx3c', 'zhqqcNafowU', 'GEDPLm5xX6s', '5wnPbzUL65Q',
@@ -39,7 +39,7 @@ const partyMoments = {
             'JecFxU07Qiw'
         ] 
     },
-    'disfraces': {  // Tecla 2: Momento de lista simple (un solo video para ejemplo)
+    'disfraces': {  // Tecla 2: Momento de lista simple
         title: "Desfile de Juguetes", 
         videos: ['CSySKnDKDuw'] 
     },
@@ -117,7 +117,7 @@ function onYouTubeIframeAPIReady() {
             'autoplay': 0, 'controls': 0, 'modestbranding': 1, 'loop': 0, 
             'rel': 0, 'showinfo': 0, 'iv_load_policy': 3, 'disablekb': 1, 
         },
-        events: { 'onReady': onPlayerReadyB } // Solo necesitamos el evento ready, no el stateChange
+        events: { 'onReady': onPlayerReadyB } 
     });
     
     // El deck inicial será A
@@ -127,20 +127,17 @@ function onYouTubeIframeAPIReady() {
 
 // 2. Se llama cuando el reproductor A está listo
 function onPlayerReadyA(event) {
-    // Solo el Deck A necesita esta configuración inicial
     event.target.mute(); 
 }
 
 // 2. Se llama cuando el reproductor B está listo
 function onPlayerReadyB(event) {
     event.target.mute(); 
-    // Aseguramos que el Deck B esté visualmente atrás
     playerB.getIframe().style.zIndex = 4;
 }
 
 // 3. Controla el estado del reproductor (SOLO el currentDeck)
 function onPlayerStateChange(event) {
-    // Solo chequeamos el estado del Deck que está sonando (currentDeck)
     if (event.target !== currentDeck) return;
     
     if (event.data === YT.PlayerState.PLAYING || event.data === YT.PlayerState.BUFFERING) {
@@ -148,7 +145,7 @@ function onPlayerStateChange(event) {
         currentDeck.setVolume(100); 
 
         // Monitoreamos solo en modos de lista automática
-        if (currentMomentKey === 'recepcion' || currentMomentKey === 'cotillon') {
+        if (currentMomentKey === 'recepcion' || currentMomentKey === 'cotillon' || currentMomentKey === 'torta') {
              startMixingMonitor();
         }
     }
@@ -172,10 +169,12 @@ function onPlayerStateChange(event) {
 
 // --- DJ Mixer Lógica de Doble Deck ---
 
-// Función que monitorea el tiempo para el fade
+// Función que monitorea el tiempo para la mezcla (Fade)
 function startMixingMonitor() {
     clearInterval(mixingMonitorInterval);
     
+    let nextVideoLoaded = false; 
+
     mixingMonitorInterval = setInterval(() => {
         if (currentDeck.getPlayerState() !== YT.PlayerState.PLAYING) return;
         
@@ -183,38 +182,61 @@ function startMixingMonitor() {
         const currentTime = currentDeck.getCurrentTime();
         const timeLeft = duration - currentTime;
         
-        // El playlist.length puede fallar, usamos el currentDeck.getPlaylist()
         const playlist = partyMoments[currentMomentKey].videos; 
         const currentIndex = currentDeck.getPlaylistIndex();
 
-        // Condición para iniciar la mezcla: no es el último video y quedan <= MIX_DURATION
-        if (timeLeft <= MIX_DURATION && timeLeft > 0 && currentIndex < playlist.length - 1) {
-            triggerDJMix(playlist, currentIndex);
+        // 1. No mezclar si es el último video
+        if (currentIndex >= playlist.length - 1) {
+            clearInterval(mixingMonitorInterval);
+            return;
+        }
+
+        // 2. Lógica de CARGA (Al 50% del video)
+        if (!nextVideoLoaded && currentTime >= duration * START_LOAD_PERCENT) {
+            loadNextTrackToStandbyDeck(playlist, currentIndex + 1);
+            nextVideoLoaded = true;
+            console.log(`[DJ] 🎧 Video ${currentIndex + 2} cargado en Standby Deck al 50%.`);
+        }
+        
+        // 3. Lógica de CROSSFADE (A 20 segundos del final)
+        if (nextVideoLoaded && timeLeft <= MIX_START_TIME && timeLeft > 0) {
+            triggerDJMix(); // Inicia el Crossfade
             clearInterval(mixingMonitorInterval);
         }
     }, 500); 
 }
 
-// Función central: Ejecuta el Crossfade de Audio y el Fade Visual
-function triggerDJMix(playlist, currentIndex) {
-    const nextVideoIndex = currentIndex + 1;
+// NUEVA FUNCIÓN: Carga el Video al 50% 
+function loadNextTrackToStandbyDeck(playlist, nextIndex) {
+    const nextVideoId = playlist[nextIndex];
+    standbyDeck.mute(); 
     
-    // 1. Cargamos el Deck de Reserva (StandbyDeck) con el siguiente video.
-    standbyDeck.mute(); // Aseguramos que inicie muteado
+    // Cargamos el video sin reproducir (para que esté listo para el Crossfade)
     standbyDeck.loadVideoById({
-        videoId: playlist[nextVideoIndex],
+        videoId: nextVideoId,
         suggestedQuality: 'hd1080'
     });
-    
-    // 2. Ponemos el Deck B en play inmediatamente (silencioso)
+}
+
+
+// Función central: Ejecuta el Crossfade de Audio y el Fade Visual
+function triggerDJMix() {
+    // Verificación de seguridad: si el Deck B no cargó (CUED), no podemos hacer el play.
+    if (standbyDeck.getPlayerState() !== YT.PlayerState.CUED) {
+        console.error("ERROR CRÍTICO: Deck B no está en estado CUED para la mezcla. Se intenta iniciar reproducción sin mezcla.");
+        currentDeck.nextVideo();
+        return;
+    }
+
+    // 1. Ponemos el Deck de Reserva en play inmediatamente (silencioso)
     standbyDeck.playVideo();
 
-    // 3. Crossfade de Audio (Fade-out Current, Fade-in Standby)
+    // 2. Crossfade de Audio (Fade-out Current, Fade-in Standby)
     const volumeStep = 100 / (MIX_DURATION * 10);
     let volumeA = 100;
     let volumeB = 0;
     
-    // Ocultamos visualmente el fade
+    // Ocultamos visualmente el fade del Deck A
     currentDeck.getIframe().classList.add('mixing'); 
 
     const audioFadeInterval = setInterval(() => {
@@ -228,22 +250,23 @@ function triggerDJMix(playlist, currentIndex) {
         
         if (volumeA <= 0 && volumeB >= 100) {
             clearInterval(audioFadeInterval);
-            currentDeck.pauseVideo(); // El Deck A ya no se necesita
-            standbyDeck.setVolume(100); // Aseguramos volumen 100%
+            currentDeck.pauseVideo(); 
+            standbyDeck.setVolume(100); 
             
-            // 4. Intercambiamos los roles de los Decks visualmente
+            // 3. Intercambiamos los roles de los Decks visualmente
             currentDeck.getIframe().style.zIndex = 4; // Se va atrás
             standbyDeck.getIframe().style.zIndex = 5; // Se viene al frente
             
-            // 5. Intercambiamos los roles lógicos para la siguiente mezcla
+            // 4. Intercambiamos los roles lógicos para la siguiente mezcla
             [currentDeck, standbyDeck] = [standbyDeck, currentDeck]; 
 
-            // 6. Restauración visual (Fade-in completo)
+            // 5. Restauración visual (Fade-in completo)
             currentDeck.getIframe().classList.remove('mixing'); 
         }
 
     }, 100); 
 }
+
 
 // 4. Gestor de Teclado (Tu "Cabina de DJ")
 document.addEventListener('keydown', (event) => {
@@ -279,7 +302,11 @@ function loadMoment(key) {
     // Detenemos cualquier monitoreo previo
     clearInterval(mixingMonitorInterval);
     if (currentDeck) currentDeck.getIframe().classList.remove('mixing');
-
+    
+    // Limpieza de Decks
+    if (currentDeck && currentDeck.stopVideo) currentDeck.stopVideo();
+    if (standbyDeck && standbyDeck.stopVideo) standbyDeck.stopVideo();
+    
     showMomentTitle(partyMoments[key].title);
     
     setTimeout(() => {
@@ -293,8 +320,6 @@ function loadMoment(key) {
 
         // Lógica de FIN
         if (key === 'fin') {
-            currentDeck.stopVideo();
-            standbyDeck.stopVideo();
             currentDeck.getIframe().style.display = 'none';
             standbyDeck.getIframe().style.display = 'none';
             menuElement.classList.remove('active');
@@ -303,7 +328,6 @@ function loadMoment(key) {
 
         // Lógica de KARAOKE/COREO (INTERACTIVO)
         if (key === 'karaoke' || key === 'coreo') {
-            currentDeck.stopVideo();
             displaySelectionMenu(moment); 
             return;
         }
@@ -332,8 +356,6 @@ function loadMoment(key) {
             currentDeck.playVideo(); 
             
         } else {
-            currentDeck.stopVideo();
-            standbyDeck.stopVideo();
             currentDeck.getIframe().style.display = 'none';
             standbyDeck.getIframe().style.display = 'none';
             console.warn(`AVISO: La lista de videos para el momento "${moment.title}" está vacía.`);
@@ -400,7 +422,7 @@ const visualizerContainer = document.querySelector('.visualizer-container');
 const numberOfBars = 50; // Cantidad de barras
 
 function createVisualizerBars() {
-    if (!visualizerContainer) return; // Verificación de seguridad
+    if (!visualizerContainer) return; 
 
     for (let i = 0; i < numberOfBars; i++) {
         const bar = document.createElement('div');
@@ -417,7 +439,6 @@ function startThePartyLogic(overlay) {
     if (partyStarted) return; 
     
     // 1. TRUCO DE PERMISO: Forzamos la reproducción y pausa inmediata
-    // Usamos el playerA para esto, ya que es el inicial
     playerA.unMute();
     playerA.loadVideoById(DUMMY_VIDEO_ID);
     playerA.playVideo(); 
@@ -442,7 +463,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const overlay = document.getElementById('start-overlay');
     if (overlay) {
         overlay.addEventListener('click', () => {
-            // Chequeamos si al menos el playerA está listo para el truco de Autoplay
             if (typeof playerA !== 'undefined' && playerA.playVideo) {
                 startThePartyLogic(overlay);
             }
@@ -451,5 +471,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Inicializa el visualizador 
     createVisualizerBars();
-    console.log("TOYfeliz50XAVY.js Script Cargado y Ejecutado. (v6.2)");
+    console.log("TOYfeliz50XAVY.js Script Cargado y Ejecutado. (v6.5)");
 });
