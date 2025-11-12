@@ -2,9 +2,12 @@
 // Lógica de funciones para DJ de Momentos de la fiesta
 //
 // :: TOYfeliz50XAVY.js
-// :: versión 6.1
+// :: versión 6.2
 // :: 12 11 25
 // :: Javier Prior
+
+// Chequeo carga JS
+console.log("TOYfeliz50XAVY.js Script Cargado y Ejecutado.");
 
 // --- VARIABLES GLOBALES ---
 let player;
