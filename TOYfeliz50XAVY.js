@@ -1,16 +1,25 @@
+// 🚀TOY feliz 50 XAVY
+// Lógica de funciones para DJ de Momentos de la fiesta
+//
+// :: TOYfeliz50XAVY.js
+// :: versión 6.1
+// :: 12 11 25
+// :: Javier Prior
+
 // --- VARIABLES GLOBALES ---
 let player;
 let currentMomentKey = null;
 let partyStarted = false; // Bandera para controlar que la fiesta solo inicie una vez
+let mixingMonitorInterval; // Variable para controlar el intervalo de monitoreo
+const MIX_DURATION = 10; // Duración de la mezcla en segundos (10s)
 
 // Video de 1 segundo para obtener permiso de Autoplay (ID de YouTube muy corto)
-const DUMMY_VIDEO_ID = '9bZkp7q19f0'; // PSY - GANGNAM STYLE
+const DUMMY_VIDEO_ID = '9bZkp7q19f0'; 
+
 
 // --- ¡LISTAS DE VIDEOS ASIGNADAS A CADA MOMENTO! ---
-// Los momentos interactivos (Karaoke, Coreo) deben tener la estructura { title, id }
-
 const partyMoments = {
-    'recepcion': {  // Tecla 1: El momento que inicia y reproduce una lista automática
+    'recepcion': {  // Tecla 1: El momento que inicia y reproduce una lista automática (con DJ Mix)
         title: "Llamada a la Misión", 
         videos: [
             'Xq-eunLqtfU', '0CjSIG-E0-s', 'ODYOJpIkx3c', 'zhqqcNafowU', 'GEDPLm5xX6s', '5wnPbzUL65Q',
@@ -25,43 +34,43 @@ const partyMoments = {
     },
     'disfraces': {  // Tecla 2: Momento de lista (vacío)
         title: "Desfile de Juguetes", 
-        videos: [] 
+        videos: ['tpokwJUUGaA'] 
     },
-    'karaoke': {  // Tecla 3: Momento INTERACTIVO de Concurso Karaoke
-        title: "Micrófono de Woody", 
-        videos: [
-            { title: "(Karaoke 1) Toy Story - Yo soy tu amigo fiel", id: "tpokwJUUGaA" },
-            { title: "(Karaoke 2) Los Palmera - Bombón Asesino", id: "t_WzCfsgkG0" }, // elegido por Ro
-            { title: "(Karaoke 3 - Dúo) Shakira y Alejandro Sans - La Tortura", id: "FynXV_rvm6M" }, // elegido por Sil
-            { title: "(Karaoke 4) Luis Miguel - Ahora Te Puedes Marchar", id: "cCvwZVKXu1g" }, // elegido por Pao
-            { title: "(Karaoke 5) Los Auténticos Decadentes - La Guitarra", id: "iqizT6ZrkkQ" },
-            { title: "(Karaoke 6) Soda Stereo - Persiana Americana", id: "OkuMgOdVwUk" },
-            { title: "(Karaoke 7) Celia Cruz - La vida es un carnaval", id: "t6x1twY6gdc" }, // elegido por Ro
-            { title: "(Karaoke 8) Miranda - Don (si, el de la guitarra de Lolo)", id: "IcWN02o4ul4" },
-            { title: "(Karaoke 9) Rafaga - Una Cerveza", id: "pZpG7ysTreU" }, // elegido por Ro
-            { title: "(Karaoke 10) Los Abuelos de la Nada - Mil Horas", id: "9CT7_sdf17I" },
-        ]
-    },
-    'torta': {  // Tecla 4: Momento de soplar velas y brindis
+    'torta': {  // Tecla 3: Momento de soplar velas y brindis
         title: "¡Al Infinito y Más Allá!", 
         videos: ['D7UU6wNTzCU', 'DQd_Ivrt7u4'] 
+    },
+    'karaoke': {  // Tecla 4: Momento INTERACTIVO de Concurso Karaoke
+        title: "Micrófono de Woody", 
+        videos: [
+            { title: "Toy Story - Yo soy tu amigo fiel", id: "tpokwJUUGaA" },
+            { title: "Los Palmera - Bombón Asesino", id: "t_WzCfsgkG0" }, 
+            { title: "Shakira y Alejandro Sans - La Tortura", id: "FynXV_rvm6M" }, 
+            { title: "Luis Miguel - Ahora Te Puedes Marchar", id: "cCvwZVKXu1g" }, 
+            { title: "Los Auténticos Decadentes - La Guitarra", id: "iqizT6ZrkkQ" },
+            { title: "Soda Stereo - Persiana Americana", id: "OkuMgOdVwUk" },
+            { title: "Celia Cruz - La vida es un carnaval", id: "t6x1twY6gdc" }, 
+            { title: "Miranda - Don (si, el de la guitarra de Lolo)", id: "IcWN02o4ul4" },
+            { title: "Rafaga - Una Cerveza", id: "pZpG7ysTreU" }, 
+            { title: "Los Abuelos de la Nada - Mil Horas", id: "9CT7_sdf17I" },
+        ]
     },
     'coreo': {  // Tecla 5: Momento INTERACTIVO de Concurso Coreo
         title: "Despegue Estelar", 
         videos: [
-            { title: "(Coreo 1) PSY - Gangman Style", id: "9bZkp7q19f0" }, // elegido por Sil
-            { title: "(Córeo 2) Las Ketchup - Aserejé", id: "arZZw8NyPq8" }, // elegido por Mumy
-            { title: "(Córeo 3) Chayanne - Provócame", id: "sOVQwlI_cks" },
-            { title: "(Córeo 4) Don Omar - Danza Kuduro", id: "yRl4hJopuwU" },
-            { title: "(Córeo 5) Los Del Río - Macarena", id: "0xv8z2tevxA" }, // elegido por Pao
-            { title: "(Córeo 6) Village People - YMCA", id: "CS9OO0S5w2k" },
-            { title: "(Córeo 7) Beyoncé - Crazy In Love", id: "JptwkEhdNfY" }, // elegido por Mumy
-            { title: "(Córeo 8) Henry Mendez - El Tiburón", id: "8QUOftzki2Y" },
-            { title: "(Córeo 9) Chocolate - Mayonesa", id: "T6NhuWYnxW0" }, // elegido por Mumy
-            { title: "(Córeo 10) Luis Miguel - Será Que No Me Amas", id: "PJTYAtrnXKs" },
+            { title: "PSY - Gangman Style", id: "9bZkp7q19f0" }, 
+            { title: "Las Ketchup - Aserejé", id: "arZZw8NyPq8" }, 
+            { title: "Chayanne - Provócame", id: "sOVQwlI_cks" },
+            { title: "Don Omar - Danza Kuduro", id: "yRl4hJopuwU" },
+            { title: "Los Del Río - Macarena", id: "0xv8z2tevxA" }, 
+            { title: "Village People - YMCA", id: "CS9OO0S5w2k" },
+            { title: "Beyoncé - Crazy In Love", id: "JptwkEhdNfY" }, 
+            { title: "Henry Mendez - El Tiburón", id: "8QUOftzki2Y" },
+            { title: "Chocolate - Mayonesa", id: "T6NhuWYnxW0" }, 
+            { title: "Luis Miguel - Será Que No Me Amas", id: "PJTYAtrnXKs" },
         ] 
     },
-    'cotillon': {  // Tecla 6: Momento de Fiesta Carioca
+    'cotillon': {  // Tecla 6: Momento de Fiesta Carioca (con DJ Mix)
         title: "Descontrol de la Misión", 
         videos: [
             'XNnKMt0EynA', 'Y4zJkOirldI', 'Oc40w_LiZRc', '3eqsSoPPz4g', 'ktxJZE-F5xs',
@@ -105,25 +114,88 @@ function onYouTubeIframeAPIReady() {
 // 2. Se llama cuando el reproductor está listo
 function onPlayerReady(event) {
     event.target.mute(); // Silencia en espera del clic
-    // La lógica de inicio se maneja en el listener de 'click' en el DOM
 }
 
-// 3. Controla el estado del reproductor (CLAVE DE LA SINCRONIZACIÓN)
+// 3. Controla el estado del reproductor (CLAVE DE LA SINCRONIZACIÓN y MONITOR)
 function onPlayerStateChange(event) {
-    // Si el estado es PLAYING (1) o BUFFERING (3), el video está cargado y listo.
     if (event.data === YT.PlayerState.PLAYING || event.data === YT.PlayerState.BUFFERING) {
         player.unMute();
+        player.setVolume(100); // Aseguramos volumen al 100% al inicio de cada track
+        // Monitoreamos solo en modos de lista automática
+        if (currentMomentKey === 'recepcion' || currentMomentKey === 'cotillon') {
+             startMixingMonitor();
+        }
     }
     
+    // Detenemos el monitoreo si el video se detiene o termina
+    if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED || event.data === YT.PlayerState.CUED) {
+         clearInterval(mixingMonitorInterval);
+         document.getElementById('player').classList.remove('mixing');
+         player.setVolume(100); // Reset de volumen y visualización
+    }
+
     // Si el estado es ENDED (0) y estamos en Karaoke o Coreo, volvemos al menú.
     if (event.data === YT.PlayerState.ENDED) {
         if (currentMomentKey === 'karaoke' || currentMomentKey === 'coreo') {
             player.stopVideo();
-            // ¡Llamamos al menú interactivo!
             displaySelectionMenu(partyMoments[currentMomentKey]);
             document.body.focus(); 
         }
     }
+}
+
+// --- DJ Mixer Lógica ---
+
+// Función que monitorea el tiempo para el fade
+function startMixingMonitor() {
+    clearInterval(mixingMonitorInterval);
+    
+    mixingMonitorInterval = setInterval(() => {
+        if (player.getPlayerState() !== YT.PlayerState.PLAYING) return;
+        
+        const duration = player.getDuration();
+        const currentTime = player.getCurrentTime();
+        const timeLeft = duration - currentTime;
+
+        // Condición para iniciar la mezcla: no es el último video y quedan <= MIX_DURATION
+        if (timeLeft <= MIX_DURATION && timeLeft > 0 && player.getPlaylistIndex() < player.getPlaylist().length - 1) {
+            triggerDJMix();
+            clearInterval(mixingMonitorInterval);
+        }
+    }, 500); 
+}
+
+// Función central: Ejecuta el Crossfade de Audio y el Fade Visual
+function triggerDJMix() {
+    // 1. Cargamos el siguiente video (Video B)
+    player.nextVideo();
+    
+    // 2. Fade Visual: Hacemos que el video desaparezca lentamente (smooth transition)
+    const playerElement = document.getElementById('player');
+    playerElement.classList.add('mixing'); 
+    
+    // 3. Crossfade de Audio (Fade-in del Video B y Fade-out del Video A)
+    let volumeStep = 100 / (MIX_DURATION * 10); // 100% / 100 pasos
+    let currentVolume = 0; 
+    
+    // El video A es el que está en realidad sonando, pero al llamar a nextVideo,
+    // el reproductor se salta al Video B y lo pone en mute al inicio.
+    // Usaremos el setVolume para hacer un Fade-in del Video B (que ya está cargado y reproduciéndose).
+    
+    const audioFadeInterval = setInterval(() => {
+        if (currentVolume >= 100) {
+            clearInterval(audioFadeInterval);
+            player.setVolume(100); 
+            playerElement.classList.remove('mixing'); // Hacemos el fade-in visual de B
+            return;
+        }
+
+        currentVolume += volumeStep;
+        
+        // Mantenemos el volumen al 100% durante el fade
+        player.setVolume(Math.round(currentVolume)); 
+
+    }, 100); 
 }
 
 
@@ -131,9 +203,10 @@ function onPlayerStateChange(event) {
 document.addEventListener('keydown', (event) => {
     const key = event.key;
     if (key >= '1' && key <= '8') {
-        event.preventDefault(); // Detiene cualquier acción por defecto del navegador
+        event.preventDefault(); 
         
-        const keys = ['recepcion', 'disfraces', 'karaoke', 'torta', 'coreo', 'cotillon', 'despedida', 'fin'];
+        // CORREGIDO: El orden de las teclas ahora es: recepcion, disfraces, torta, karaoke, coreo, cotillon, despedida, fin
+        const keys = ['recepcion', 'disfraces', 'torta', 'karaoke', 'coreo', 'cotillon', 'despedida', 'fin']; 
         const momentKey = keys[parseInt(key) - 1];
         loadMoment(momentKey);
     }
@@ -158,10 +231,16 @@ function applyTransitionEffect(callback) {
 function loadMoment(key) {
     if (!partyMoments[key] || key === currentMomentKey) return; 
 
+    // Detenemos el monitoreo si cambiamos a un modo no automático
+    if (key !== 'recepcion' && key !== 'cotillon') {
+        clearInterval(mixingMonitorInterval);
+        document.getElementById('player').classList.remove('mixing');
+        player.setVolume(100); // Aseguramos volumen al 100% en modos sin mix
+    }
+    
     showMomentTitle(partyMoments[key].title);
     
-    // CORRECCIÓN FINAL DE FOCO: Programamos el foco para después de la transición
-    // y antes de la acción del teclado para garantizar que funcione.
+    // CORRECCIÓN FINAL DE FOCO
     setTimeout(() => {
         document.body.focus(); 
     }, 1100); 
@@ -182,7 +261,7 @@ function loadMoment(key) {
         // Lógica de KARAOKE/COREO (INTERACTIVO)
         if (key === 'karaoke' || key === 'coreo') {
             player.stopVideo();
-            displaySelectionMenu(moment); // Muestra el menú y detiene el código aquí
+            displaySelectionMenu(moment); 
             return;
         }
         
@@ -194,7 +273,6 @@ function loadMoment(key) {
         if (moment.videos && moment.videos.length > 0) {
             document.getElementById('player').style.display = 'block';
             
-            // Carga la lista de videos (automática)
             player.loadPlaylist({
                 playlist: moment.videos,
                 index: 0,
@@ -204,7 +282,6 @@ function loadMoment(key) {
             player.playVideo(); 
             
         } else {
-            // Si la lista está vacía
             player.stopVideo();
             document.getElementById('player').style.display = 'none';
             console.warn(`AVISO: La lista de videos para el momento "${moment.title}" está vacía.`);
@@ -227,7 +304,7 @@ function showMomentTitle(title) {
         titleElement.classList.add('visible');
         setTimeout(() => {
             titleElement.classList.remove('visible');
-        }, 4000); // 4 segundos en pantalla
+        }, 4000); 
     }
 }
 
@@ -246,9 +323,8 @@ function displaySelectionMenu(moment) {
         button.className = 'menu-button';
         button.textContent = video.title;
         
-        // El clic del botón llama a la reproducción individual y oculta el menú
         button.onclick = () => {
-            loadSingleVideo(video.id); // Llama a la nueva función
+            loadSingleVideo(video.id); 
             menuElement.classList.remove('active');
         };
         container.appendChild(button);
@@ -261,7 +337,6 @@ function displaySelectionMenu(moment) {
 function loadSingleVideo(videoId) {
     document.getElementById('player').style.display = 'block';
     player.unMute();
-    // Usamos loadVideoById porque es un solo video, no una playlist
     player.loadVideoById(videoId, 0, 'hd1080');
 }
 
@@ -272,7 +347,6 @@ window.addEventListener('load', () => {
     const overlay = document.getElementById('start-overlay');
     if (overlay) {
         overlay.addEventListener('click', () => {
-            // ¡Verificación crítica antes de iniciar!
             if (typeof player !== 'undefined' && player.playVideo) {
                 startThePartyLogic(overlay);
             }
