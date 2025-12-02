@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>#TOYfeliz50XAVY - ¡Al Infinito y Más Allá!</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers:wght@400..700&family=Roboto:wght@400..700&family=Anton:wght@300..700&family=Kode+Mono:wght@400..700&display=swap">
+
+    <style>
+        /* ... (tu CSS existente) ... */
+
+        body 
+        {
+            /* Posicionamiento */
+            z-index: 1;
+
+            /* Modelo de Caja */
+            width: 100%;
+            height: 100%;
+            
+            /* Visual */
+            background-color: black;
+        }
+        
+        header 
+        {
+            /* Posicionamiento */
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 60;
+
+            /* Modelo de Caja */
+            width: 100%;
+            height: 10%;
+            margin: 0;
+            padding: 0;
+
+            /* Visual */
+            background-color: greenyellow;
+        }
+
+        .logo 
+        {
+            /* Posicionamiento */
+            top: 10px;
+            z-index: 90;
+
+            /* Modelo de Caja */
+            max-width: 600px;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+
+            /* Visual */
+            background-image: url('assets/img/logo-top-blanco.png');
+            background-repeat: no-repeat;
+            background-position: 40px center;
+            background-size: 200px;
+        }
+
+        main 
+        {
+            /* Posicionamiento */
+            position:fixed;
+            top: 10vh;
+            left: 0;
+            z-index: 1;
+
+            /* Modelo de Caja */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 30px;
+            margin: 0;
+            width: 100%;
+            height: 75%;        
+
+            /* Visual */
+            background-color: gray;
+        }
+
+        
+        .titular
+        {
+            /* Modelo de Caja */
+            padding: 0;
+            margin: 0; 
+
+            /* Tipografía */
+            font-family: 'Bangers', cursive;
+            color: yellow;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        h1
+        {
+            /* Tipografía */
+            font-size: 96px;
+            text-align: center;
+            letter-spacing: 5px;
+            text-shadow: 3px 3px 0px rgba(0,0,255,0.8),
+                -3px -3px 0px rgba(0,0,255,0.5),
+                3px 3px 0px rgba(0,0,255,0.5),
+                -3px -3px 0px rgba(0,0,255,0.5);
+        }
+
+        footer 
+        {
+            /* Posicionamiento */
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            z-index: 60;
+            
+            /* Modelo de Caja */
+            display: flex;
+            justify-content: c;
+            width: 100%;
+            height: 15%;
+
+            /* Visual */
+            background-color: orange;
+        }
+
+        .hashtag 
+        {
+            /* Posicionamiento */
+            position: absolute;
+            right: 40px;
+            z-index: 90;
+
+            /* Modelo de Caja */
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+
+            /* Tipografía */
+            font-size: 70px;
+            text-align: right;
+
+            /* Visual */
+            text-shadow: 
+                3px 3px 0px #0000AA, 
+                -3px -3px 0px #0000AA, 
+                3px -3px 0px #0000AA, 
+                -3px 3px 0px #0000AA, 
+                4px 4px 5px rgba(0,0,0,0.5);
+
+            /* Animación */
+            animation: hashtag-glow 3s infinite ease-in-out;
+        }
+
+        /* Animación del Hashtag*/
+        @keyframes hashtag-glow
+        {
+            0%, 100%
+                {
+                    text-shadow: 
+                        3px 3px 0px #0000AA, 
+                        -3px -3px 0px #0000AA, 
+                        3px -3px 0px #0000AA, 
+                        -3px 3px 0px #0000AA, 
+                        4px 4px 5px rgba(0,0,0,0.5); 
+                }
+
+            50%
+                {
+                    text-shadow: 
+                        3px 3px 0px var(--color-destacado-violeta), 
+                        -3px -3px 0px var(--color-destacado-violeta), 
+                        3px -3px 0px var(--color-destacado-violeta), 
+                        -3px 3px 0px var(--color-destacado-violeta), 
+                        0 0 25px var(--color-buzz-blanco), 
+                        4px 4px 10px rgba(0,0,0,0.5); 
+                }
+        }
+
+        .font-toy-50 
+        {
+            /* Modelo de Caja */
+            z-index: 10;
+
+            /* Tipografía */
+            font-family: 'Bangers', cursive;
+            color: yellow;
+            font-weight: 800;
+        }
+
+        .font-feliz 
+        {
+            /* Modelo de Caja */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 25px;
+            margin: -5px;
+            z-index: 10;
+
+            /* Tipografía */
+            font-family: 'Anton', sans-serif;
+            font-size: 60px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: yellow;
+
+            /* Visual */
+            transform: scaleY(0.4);
+        }
+
+        .fondo-feliz
+        {
+            /* Modelo de Caja */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 45px;
+            margin: -10px;
+
+            /* Visual */
+            background: darkred;   
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+      <div class="logo"><a href="index.html"></a></div>
+    </header>
+
+    <main>
+      <div class="" id="bitacora">  
+        <h1>Bitácora de la Misión</h1>
+        <p>Éste documento oficial del COMANDO ESTELAR es absolutamente confidencial y se te hace entrega en exclusiva por haber aceptado la asignación de tan importante Misión. Contiene:</p><ul>
+          
+          <li><h3><strong>MENSAJE DEL COMANDANTE ESTELAR</strong></h3></li>
+          <li><h3><strong>CÓDIGO DE HONOR INTERESTELAR</strong></h3></li>
+          <li><h3><strong>AGENDA DE LA MISIÓN</strong></h3></li>
+          <li><h3><strong>DESAFÍOS DE LA MISIÓN</strong></h3></li>
+        </ul>
+
+        <h2>MENSAJE DEL COMANDANTE ESTELAR</h2>
+        <p>El comandante estelar <strong>XAVY Lightyear</strong> te comunica su gratitud por haber aceptado ser parte oficial de su <strong>Equipo</strong> y te anticipa detalles de tu próxima Misión, cuyo nombre clave será <strong>TOY feliz 50</strong>. Será un honor para él cumplir la Misión a tu lado para celebrar, junto al resto de la tripulación, su 5ta década.</p>
+
+        <p>El COMANDO ESTELAR confía en que tu desempeño será memorable, por lo que te habilita ingresar a la Misión desde las 2100 horas del sábado 6 de diciembre de 2025, expresando el nombre clave en el <strong>Portal de Misión</strong>.</p> 
+
+        <p>Serás parte de un verdadero hito en la historia de la <strong>ALIANZA INTERGALÁCTICA</strong> iniciando una travesía épica (en la que no faltarán sorpresas alegres), con la oportunidad de demostrar tus habilidades personales y grupales para superar los retos previstos que garantizan la diversión.</p>
+
+
+        <h2>CÓDIGO DE HONOR INTERESTELAR</h2>
+        <p>El COMANDO ESTELAR te recuerda la vigencia del Código de Conducta Galáctico que establece las bases y los principios sobre los que se construye el comportamiento esperado de toda tripulación oficial en misión. Un verdadero Código de Honor Intergalático que guía a todo oficial estelar, sin importar su rango. Para ésta ocasión se te comunica que se han definido <strong>Premisas</strong> específicas de la Misión y representan el espíritu de TOY feliz 50. Son las siguientes:</p><ul>
+
+          <li><h3><strong>FELICIDAD</strong></h3><ul>
+        
+            <li><strong>Todos los integrantes del Equipo</strong> disfrutarán de una Misión divertida, cómoda y descontracturada. <strong>Sin excepciones</strong>. Con actitud positiva, predispuesta y de respeto mutuo.</li>
+      
+            <li>El cuidado integral es prioritario.<strong>Nadie del Equipo</strong> deberá esforzarse ni estresarse de más. Integrarás un Equipo solidario, autonomo y colaborativo.</li>
+
+            <li>Para garantizar una Misión feliz y segura, el COMANDO ESTELAR activará el <strong>PROTOCOLO ALCOHOL CERO EN MISIÓN</strong>, por lo que proveerá solo suminstros de bebidas sin alcohol. Sin embago, te autoriza ingresar a la Misión tus propios suministros de bebidas alcohólicas, bajo tu riesgo, confiando en tu responsabilidad en el cumplimiento de las normas y en tu conducta de honor.</li></ul></li>
+    
+
+          <li><strong>LIBERTAD</strong><ul>
+    
+            <li>Será una Misión en la que podrás actuar <strong>sin imposiciones, obligaciones o condicionamientos</strong>, y disfrutar a tu propio tiempo y manera, siguiendo como única regla <strong >respetar límites mínimos de éste CÓDIGO y las buenas costumbres</strong> que caracterizan al COMANDO ESTELAR.</li>
+      
+            <li>La participación será libre y opcional, por lo cual <strong>ningún integrante del Equipo estará obligado a realizar los desafíos ni será invitado a las actividades con insistencia</strong>. Tanto las actividades como los desafíos serán anunciados antes de su inicio, siguiendo la <strong>Agenda de la Misión</strong>, oportunidad en la que serás invitando a participar por única vez, confiando en tu interés de vivir una experiencia agradable y relajada, y al mismo tiempo intensa, divertida, familiar y amorosa.</li>
+      
+            <li>Al igual que todos los integrantes del Equipo, tendrás <strong>libre acceso</strong> (con algunos requerimientos según tu rol) a: las actividades y desafíos, los lugares habilitados, y los suministros (identificación, accesorios, comida y bebida durante toda la Misión; y cotillón durante el Baile Carioca).</li>
+      
+            <li>Podrás realizar la Misión <strong>con ropa y calzado cómodos</strong>, pudiendo estar sin calzados todo el tiempo.</li></ul></li>
+    
+
+          <li><strong>PRIORIDAD</strong><ul>
+    
+            <li>La <strong>comida no será el centro</strong> de la Misión, ni determinará los Momentos de actividades y desafíos. Estará siempre accesible para el autoservicio.</li>
+    
+            <li>Durante la Misión estará la <strong>atención puesta en los Momentos con sus actividades y desafíos</strong>, que podrás disfrutar desde el espacio habilitado que prefieras.</li>
+
+            <li>En la Misión <strong>la música y las luces serán no invasivas</strong>, resetando un volúmen residencial galáctico que permitirá tu comunicación personal con el resto de la tripulación, y con espacios de descanso visual libre de láser y luces donde podrás contemplar las estrellas.</li></ul></li></ul>
+
+
+        <h2>AGENDA DE LA MISIÓN</h2>
+        <p>El COMANDO ESTELAR definió que, junto al Equipo, tendrás 7 horas para cumplir la Misión. Con la expectativa en tu heróico desempeño para superar los desafíos y acompañar al comandante estelar en las actividades, el COMANDO ESTELAR ha distribuído en 7 Momentos la Misión, con lugares y horarios establecidos de la siguiente manera:</p>
+
+          <h3><strong>CRONOLOGÍA</strong></h3>
+          <table>
+            <tr class="table-header" id="cronología">
+              <td><strong>Hora</strong></td>
+              <td><strong>Momento</strong></td>
+              <td><strong>Duración</strong></td>
+              <td><strong>Zona</strong></td>
+            </tr>
+              
+            <tr id="M1">
+              <td><strong>2100</strong></td>
+              <td>📢📋🚀<br/><strong>Llamada a la Misión</strong></td>
+              <td>60 min</td>
+              <td>ZONA A:<br/><strong>CENTRAL DE COMANDO ESTELAR</strong><br/>[Galería del Patio]</td>
+            </tr>
+              
+            <tr id="M2">
+              <td><strong>2200</strong></td>
+              <td>🥇🧑‍🚀🦖<br/><strong>Desfile de Juguetes</strong><br/>(Concurso de Disfraces y Representación de escenas del personaje)</td>
+              <td>60 min</td>
+              <td>ZONA A:<br/><strong>CENTRAL DE COMANDO ESTELAR</strong><br/>[Galería del Patio]</td>
+            </tr>
+              
+            <tr id="M3">
+              <td><strong>2300</strong></td>
+              <td>🎂🍾🥂<br/><strong>Al Infinito y Más Allá!</strong><br/>(Torta y Brindis)</td>
+              <td>30 min</td>
+              <td>ZONA A:<br/><strong>CENTRAL DE COMANDO ESTELAR</strong><br/>[Galería del Patio]</td>
+            </tr>
+              
+            <tr id="M4">
+              <td><strong>2330</strong></td>
+              <td>🥈🎤🎶<br/><strong>Micrófono de Woody</strong><br/>(Concurso de Karaoke)</td>
+              <td>60 min</td>
+              <td>C:<br/><strong>ESPACIO ULTRAVIOLETA</strong><br/>[Living de la Casa]</td>
+            </tr>
+              
+            <tr id="M5">
+              <td><strong>0030</strong></td>
+              <td>🥉🕺👯‍♀️<br/><strong>Sincro Estelar</strong><br/>(Concurso de Coreografías)</td>
+              <td>60 min</td>
+              <td>ZONZ C:<br/><strong>ESPACIO ULTRAVIOLETA</strong><br/>[Living de la Casa]</td>
+            </tr>
+              
+            <tr id="M6">
+              <td><strong>0130</strong></td>
+              <td>🪩🎉🪇<br/><strong>Descontrol de la Misión</strong><br/>(Baile Carioca y Baile Libre)</td>
+              <td>90 min</td>
+              <td>A:<br/><strong>CENTRAL DE COMANDO ESTELAR</strong><br/>[Galería del Patio]</td>
+            </tr>
+              
+            <tr id="M7">
+              <td><strong>0300</strong></td>
+              <td>🏅🧑‍🚀🎖️<br/><strong>Fin de la Misión</strong><br/>(Despedida)</td>
+              <td>30 min</td>
+              <td>A:<br/><strong>CENTRAL DE COMANDO ESTELAR</strong><br/>[Galería del Patio]</td>
+            </tr>
+
+          </table>
+
+        <h2>PREPÁRATE CON ANTICIPACIÓN A LOS DESAFÍOS DE LA MISIÓN</h2>
+        <p>Como habrás observado, tanto en el formulario de la invitación como en la presente Bitácora, se te anticipó que durante la Misión habrán 3 desafíos principales: El Concurso de Disfraces y Actuación, el Concurso de Canto en Karaoke, y el Concurso de Baile Coreográfico Grupal.</p>
+
+          <h3><strong>SOBRE LOS DESAFÍOS</strong></h3>
+          <p></p>
+
+
+<h3>SOBRE LAS DISTINCIONES</h3>
+<p>En cada desafío podrás obtener insignias de Distinción, las cuales se te podrán ser entregadas si el honorable jurado (del cual podras ser parte en otro desafío del que no participes) evalúa tu desempeño (bajo criterios específicos) como meritorio.</p>
+
+<p>Serán 22 insignias en total y, al finalizar la Misión, el propio Comandante Estelar hará entrega de una súper insignia al integrante del Equipo que más insignias haya alcanzado gracias a sus habilidades. En caso de empate, será la actitud en el cumplimiento de la Misión la que será determinante para que el comandante desempate.</p>
+
+
+<h3>SOBRE EL JURADO</h3>
+<p>Por cada desafío se constituira un Jurado integrado por 3 miembros, cupo que se alcanzará por orden de admisión.</p>
+
+<p>Podrá ser miembro del Jurado cualquier integrante del Equipo, para lo cual deberá solicitar al comandante su admisión al iniciar la Misión, y no podrá participar del desafío al que evaluará, ni integrar más de un Jurado.</p>
+
+<p>El Jurado recibirá el listado de Distinciones de cada desafío con sus respectivos criterios evaluativos y se le asignará un espacio y tiempo para sus deliberaciones al finalizar cada desafío.</p>
+
+<p>El Jurado entregará al comandante sus decisiones de reconocimiento, quien anunciará los resultados, llamando a los integrantes del Equipo para que reciban sus insignias.</p>
+
+🎂💃🌟💫
+
+ 
+    </main>
+
+    <footer>
+        <div class="hashtag">
+            <span class="font-toy-50">#TOY</span>
+            <span class="fondo-feliz">
+                <span class="font-feliz">FELIZ</span>
+            </span>
+            <span class="font-toy-50">50</span>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,667 @@
+/*
+
+    🚀 TOY feliz 50 XAVY 👨‍🚀
+  
+    Estilos generales para 
+    Sitio de Invitados de la fiesta
+
+    :: bitacora.css (Estética Comando Estelar)
+    :: versión 8.3
+    :: 01 12 25
+    :: Javier Prior
+
+*/
+
+a {
+    color: var(--color-turquesa);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover { 
+    color: var(--color-verde-neon); 
+}
+
+#bitacora {
+    /* Posicionamiento */
+    position: relative;
+
+    /* Modelo de Caja */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    /* Tipografía (N/A) */
+
+    /* Visual */
+    /* Fondo de nebulosa/estrellas - AHORA USA EL FONDO REAL */
+    background: url('assets/img/bg-operator-space.png') no-repeat center center fixed; 
+    background-size: cover;
+}
+
+/* Efecto Overlay para simular un panel de nave espacial */
+.bitacora.overlayer {
+    /* Posicionamiento */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--layer-09-superior);
+
+    /* Modelo de Caja */
+    width: 100%;
+    height: 100%;
+
+    /* Tipografía (N/A) */
+
+    /* Visual */
+    background: var(--color-panel);
+    backdrop-filter: blur(3px); 
+    pointer-events: none;
+}
+
+/* Header: Visor de Nave o Banner de Misión */
+.bitacora.header {
+    /* Posicionamiento */
+    position: relative;
+    z-index: var(--layer-07-alto);
+
+    /* Modelo de Caja */
+    padding: 20px 0;
+    border-bottom: 5px solid var(--color-base-amarillo-oro);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Tipografía */
+    text-align: center;
+
+    /* Visual */
+    background: linear-gradient(to right, var(--color-base-azul-indigo), var(--color-base-violeta-deep));
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.bitacora.header .logo {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    width: 150px; 
+    height: 50px;
+    text-indent: -9999px;
+
+    /* Tipografía (N/A) */
+
+    /* Visual */
+    /* LOGO DEL COMANDO ESTELAR ACTUALIZADO */
+    background: url('assets/img/logo-sc.png') no-repeat center center; 
+    background-size: contain;
+}
+.bitacora.header .logo a {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    /* Tipografía (N/A) */
+    /* Visual (N/A) */
+}
+
+
+/* Contenido Principal: Pantalla de Datos / Terminal */
+.bitacora.main {
+    /* Posicionamiento */
+    position: relative;
+    z-index: var(--layer-07-alto);
+
+    /* Modelo de Caja */
+    margin: 2rem auto; /* Ajustado para mejor visualización vertical */
+    max-width: 960px;
+    padding: 20px;
+    border: 2px solid var(--color-turquesa);
+    border-radius: 10px;
+    flex-grow: 1; 
+
+    /* Tipografía (N/A) */
+
+    /* Visual */
+    background-color: var(--color-panel);
+    box-shadow: 0 0 20px var(--color-turquesa); 
+}
+
+/* Navegación por pestañas: Botones de Consola */
+.tabs {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid var(--color-base-azul-indigo);
+    margin-bottom: 20px;
+    flex-wrap: wrap; 
+
+    /* Tipografía (N/A) */
+    /* Visual (N/A) */
+}
+
+.tab {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    border: 1px solid var(--color-turquesa);
+    border-bottom: none;
+    padding: 10px 20px;
+    margin: 0 2px; 
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+    /* Tipografía */
+    font-family: var(--fuente-comando);
+    font-size: 2.1rem; /* ESCALA AJUSTADA: 21px */
+    color: var(--color-base-hielo);
+
+    /* Visual */
+    background-color: var(--color-base-azul-indigo);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.tab:hover {
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja */
+    border-color: var(--color-verde-neon);
+
+    /* Tipografía */
+    color: var(--color-verde-neon);
+
+    /* Visual */
+    background-color: var(--color-azul-royal);
+}
+
+.tab.active {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    border-color: var(--color-base-amarillo-oro);
+
+    /* Tipografía */
+    color: var(--color-base-amarillo-oro);
+
+    /* Visual */
+    background-color: var(--color-azul-royal);
+    cursor: default;
+    box-shadow: 0 0 10px var(--color-base-amarillo-oro);
+    transform: translateY(2px); 
+}
+
+/* Contenido de cada pestaña */
+.bitacora.tabcontent {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    padding: 25px;
+    border-radius: 5px;
+    border: 1px solid var(--color-base-violeta-deep);
+    
+    /* === AJUSTE DE ALTURA CON VH === */
+    max-height: 65vh; /* Altura máxima reducida para asegurar que el .main no desborde verticalmente */
+    overflow-y: auto; 
+    /* =========================== */
+
+    /* Tipografía (N/A) */
+
+    /* Visual */
+    background-color: rgba(0, 0, 0, 0.4); 
+    box-shadow: inset 0 0 15px var(--color-violeta-vivid);
+}
+
+.tabcontent.hidden {
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja */
+    display: none;
+    /* Tipografía (N/A) */
+    /* Visual (N/A) */
+}
+
+/* Custom Scrollbar for Comando Estelar look */
+.bitacora.tabcontent::-webkit-scrollbar {
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja */
+    width: 10px;
+    /* Tipografía (N/A) */
+    /* Visual (N/A) */
+}
+.bitacora.tabcontent::-webkit-scrollbar-track {
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía (N/A) */
+    /* Visual */
+    background: var(--color-panel);
+    border-radius: 10px;
+}
+.bitacora.tabcontent::-webkit-scrollbar-thumb {
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía (N/A) */
+    /* Visual */
+    background: var(--color-base-azul-indigo);
+    border: 1px solid var(--color-turquesa);
+    border-radius: 10px;
+}
+.bitacora.tabcontent::-webkit-scrollbar-thumb:hover {
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía (N/A) */
+    /* Visual */
+    background: var(--color-azul-royal);
+}
+
+
+/* Tipografías y estilos de texto */
+h1 {
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja */
+    margin-bottom: 30px;
+
+    /* Tipografía */
+    font-family: var(--fuente-logo-toy-50); /* Bangers */
+    font-size: 4.0rem; /* ESCALA AJUSTADA: 40px */
+    color: var(--color-base-amarillo-oro);
+    text-align: center;
+
+    /* Visual */
+    text-shadow: 3px 3px 0 var(--color-base-naranja-red);
+}
+
+h2 {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    margin-top: 40px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-base-azul-cielo);
+
+    /* Tipografía */
+    font-family: var(--fuente-comando); /* Kode Mono */
+    font-size: 3.4rem; /* ESCALA AJUSTADA: 34px */
+    color: var(--color-turquesa);
+    text-align: left;
+
+    /* Visual */
+    text-shadow: 1px 1px 0 var(--color-base-azul-indigo);
+}
+
+h3 {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    margin-top: 25px;
+
+    /* Tipografía */
+    font-family: var(--fuente-comando); /* Kode Mono */
+    font-size: 2.4rem; /* ESCALA AJUSTADA: 24px */
+    color: var(--color-verde-neon);
+
+    /* Visual */
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+p, ul, li {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    margin-bottom: 15px;
+
+    /* Tipografía */
+    font-family: var(--fuente-base); /* Roboto */
+    font-size: 1.6rem; /* ESTILO BASE: 16px */
+    color: var(--color-base-hielo);
+
+    /* Visual (N/A) */
+}
+
+strong {
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+
+    /* Tipografía */
+    color: var(--color-base-amarillo-oro);
+
+    /* Visual (N/A) */
+}
+
+/* Listas */
+ul {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    padding-left: 25px;
+    margin-left: 0;
+
+    /* Tipografía */
+    list-style-type: '🚀 '; /* Bullet personalizado */
+
+    /* Visual (N/A) */
+}
+ul ul {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    padding-left: 20px;
+
+    /* Tipografía */
+    list-style-type: '⭐ '; /* Bullet secundario */
+
+    /* Visual (N/A) */
+}
+li {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    margin-bottom: 8px;
+
+    /* Tipografía (N/A) */
+    /* Visual (N/A) */
+}
+
+
+/* Tablas: Display de Datos / Consola */
+table {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    width: 100%;
+    margin: 30px 0;
+    border-collapse: collapse;
+
+    /* Tipografía */
+    font-family: var(--fuente-comando);
+    font-size: 1.6rem; /* ESTILO BASE: Usamos 16px para el texto de la tabla */
+    text-align: left;
+
+    /* Visual */
+    background-color: rgba(0, 0, 0, 0.6); 
+    box-shadow: inset 0 0 10px var(--color-base-violeta-deep);
+}
+
+.table-header {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    border-bottom: 2px solid var(--color-base-amarillo-oro);
+
+    /* Tipografía */
+    color: var(--color-base-amarillo-oro);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    /* Visual */
+    background-color: var(--color-base-azul-indigo);
+}
+
+.table-header td {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    padding: 12px 15px;
+
+    /* Tipografía (N/A) */
+    /* Visual (N/A) */
+}
+
+table tr {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* Tipografía (N/A) */
+    /* Visual (N/A) */
+}
+
+table tr:nth-child(even) {
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía (N/A) */
+    /* Visual */
+    background-color: rgba(0, 0, 0, 0.3); 
+}
+
+table tr:hover {
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía (N/A) */
+    /* Visual */
+    background-color: var(--color-panel);
+}
+
+table td {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    padding: 10px 15px;
+
+    /* Tipografía */
+    vertical-align: top;
+    color: var(--color-base-hielo);
+
+    /* Visual (N/A) */
+}
+
+table td strong {
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+
+    /* Tipografía */
+    color: var(--color-turquesa); 
+
+    /* Visual (N/A) */
+}
+
+/* Botones de acción (ej. en la sección insignias) */
+#insignias-generador button, .youtube {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    border: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+
+    /* Tipografía */
+    font-family: var(--fuente-comando);
+    font-size: 2.1rem; /* ESCALA AJUSTADA: 21px */
+    color: var(--color-base-negro);
+    text-transform: uppercase;
+
+    /* Visual */
+    background-color: var(--color-verde-neon);
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 10px var(--color-verde-neon);
+}
+
+#insignias-generador button:hover, .youtube:hover {
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía (N/A) */
+    /* Visual */
+    background-color: var(--color-turquesa);
+    box-shadow: 0 0 15px var(--color-turquesa);
+}
+
+.youtube {
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía (N/A) */
+    /* Visual */
+    background-color: var(--color-base-naranja-red);
+    box-shadow: 0 0 10px var(--color-base-naranja-red);
+}
+.youtube:hover {
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía (N/A) */
+    /* Visual */
+    background-color: var(--color-base-amarillo-oro);
+    box-shadow: 0 0 15px var(--color-base-amarillo-oro);
+}
+
+/* Mensajes "Próximamente" */
+#proximamente {
+    /* Posicionamiento (N/A) */
+
+    /* Modelo de Caja */
+    padding: 50px 0;
+    border: 2px dashed var(--color-base-naranja-red);
+
+    /* Tipografía */
+    text-align: center;
+    color: var(--color-base-naranja-red);
+    font-family: var(--fuente-comando);
+
+    /* Visual (N/A) */
+}
+#proximamente h2 {
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja */
+    border-bottom: none;
+
+    /* Tipografía */
+    color: var(--color-base-naranja-red);
+
+    /* Visual (N/A) */
+}
+
+/* Footer: Panel inferior */
+footer {
+    /* Posicionamiento */
+    position: relative;
+    z-index: var(--layer-06-intermedio);
+
+    /* Modelo de Caja */
+    padding: 15px 0;
+    border-top: 3px solid var(--color-base-violeta-deep);
+    margin-top: auto;
+
+    /* Tipografía */
+    text-align: center;
+
+    /* Visual */
+    background-color: var(--color-panel); 
+}
+
+.hashtag {
+    /* Posicionamiento */
+    margin: 0 auto;
+
+    /* Modelo de Caja */
+    width: 250px; 
+    height: 70px;
+    /* Ocultar el texto del hashtag para mostrar el logo */
+    text-indent: -9999px;
+    
+    /* Tipografía (N/A) */
+
+    /* Visual */
+    /* LOGO DE LA FIESTA COMPLETO EN EL PIE DE PÁGINA */
+    background: url('assets/img/TOYfeliz50XAVY.png') no-repeat center center;
+    background-size: contain;
+}
+/* Se eliminan los estilos específicos para .font-toy-50, .fondo-feliz, y .font-feliz
+   ya que el texto ha sido ocultado y reemplazado por una imagen de fondo en .hashtag */
+
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .bitacora.main {
+        /* Posicionamiento (N/A) */
+        /* Modelo de Caja */
+        margin: 20px auto;
+        padding: 15px;
+        /* Tipografía (N/A) */
+        /* Visual (N/A) */
+    }
+    h1 {
+        /* Posicionamiento (N/A) */
+        /* Modelo de Caja (N/A) */
+        /* Tipografía */
+        font-size: 3.0rem; /* ESCALA AJUSTADA: 30px */
+        /* Visual (N/A) */
+    }
+    h2 {
+        /* Posicionamiento (N/A) */
+        /* Modelo de Caja (N/A) */
+        /* Tipografía */
+        font-size: 2.0rem; /* ESCALA AJUSTADA: 20px */
+        /* Visual (N/A) */
+    }
+    .tabs {
+        /* Posicionamiento (N/A) */
+        /* Modelo de Caja */
+        flex-direction: column; 
+        align-items: stretch;
+        /* Tipografía (N/A) */
+        /* Visual (N/A) */
+    }
+    .tab {
+        /* Posicionamiento (N/A) */
+        /* Modelo de Caja */
+        border-radius: 0;
+        margin: 0;
+        border-bottom: 1px solid var(--color-turquesa);
+        /* Tipografía (N/A) */
+        /* Visual (N/A) */
+    }
+    .tab:first-child {
+        /* Posicionamiento (N/A) */
+        /* Modelo de Caja */
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        /* Tipografía (N/A) */
+        /* Visual (N/A) */
+    }
+    .tab:last-child {
+        /* Posicionamiento (N/A) */
+        /* Modelo de Caja */
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        /* Tipografía (N/A) */
+        /* Visual (N/A) */
+    }
+    .table-header td, table td {
+        /* Posicionamiento (N/A) */
+        /* Modelo de Caja */
+        padding: 8px 10px;
+        /* Tipografía (N/A) */
+        /* Visual (N/A) */
+    }
+    .bitacora.tabcontent {
+        max-height: 60vh; /* Altura máxima reducida para móvil */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        /* Posicionamiento (N/A) */
+        /* Modelo de Caja (N/A) */
+        /* Tipografía */
+        font-size: 2.4rem; /* ESCALA AJUSTADA: 24px */
+        /* Visual (N/A) */
+    }
+    h2 {
+        /* Posicionamiento (N/A) */
+        /* Modelo de Caja (N/A) */
+        /* Tipografía */
+        font-size: 1.7rem; /* ESCALA AJUSTADA: 17px */
+        /* Visual (N/A) */
+    }
+    .hashtag {
+        /* Posicionamiento (N/A) */
+        /* Modelo de Caja */
+        width: 180px; /* Ajuste para móvil */
+        height: 50px;
+        /* Tipografía (N/A) */
+        /* Visual (N/A) */
+    }
+}

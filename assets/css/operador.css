@@ -1,0 +1,278 @@
+/*
+
+🚀TOY feliz 50 XAVY
+Estilos generales para VJ de Momentos de la fiesta
+
+:: TOYfeliz50XAVY_operador.css
+:: versión 8.1
+:: 14 11 25
+:: Javier Prior
+
+*/
+
+:root
+{
+  /* Colores Buzz Lightyear/Toy Story */
+  --color-buzz-violeta: #4A007D; 
+  --color-buzz-azul: #00BFFF; 
+  --color-buzz-verde: #00FFBF; 
+  --color-buzz-rojo: #FF0000; 
+  --color-buzz-blanco: #FFFFFF; 
+  --color-buzz-negro: #000000; 
+
+  /* Colores Operador */
+  --color-fuente: #EAF6FF;
+  --color-panel-bg: rgba(2,10,20,0.7);
+  --color-accento: #66ccff;
+  --color-neon: #ADFF2F; 
+  --color-peligro: #FF4000;
+
+  /* Tipografías */
+  --fuente-titulos: 'Bangers', cursive;
+  --fuente-base: 'Roboto', sans-serif;
+  --fuente-crono: "Kode Mono", monospace;
+}
+
+html,
+body
+{
+  /* Modelo de Caja */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+  /* Tipografía */
+  font-family: var(--fuente-base);
+  font-size: 10px; /* Base para rem */
+  color: var(--color-fuente);
+
+  /* Visual */
+  background-color: var(--color-buzz-negro);
+  overflow: hidden;
+}
+
+#bg-overlay
+{
+  /* Posicionamiento */
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+
+  /* Visual */
+  background-image: url('bg-operator-space.png');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.45) saturate(1.05);
+  
+}
+
+.dashboard
+{
+  /* Modelo de Caja */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+}
+
+.topbar
+{
+  /* Modelo de Caja */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar .title
+{
+  /* Tipografía */
+  font-family: var(--fuente-base);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-accento);
+  text-shadow: 0 0 8px rgba(102,204,255,0.25);
+}
+
+.clock
+{
+  /* Modelo de Caja */
+  margin-left: auto;
+  padding: 6px 10px;
+
+  /* Tipografía */
+  font-family: var(--fuente-crono);
+
+  /* Visual */
+  background: rgba(0,0,0,0.45);
+  border-radius: 6px;
+}
+
+.btn
+{
+  /* Modelo de Caja */
+  padding: 8px 12px;
+
+  /* Tipografía */
+  color: var(--color-buzz-blanco);
+  
+  /* Visual */
+  background: linear-gradient(
+    180deg,
+    #2A6FB3,
+    #184F8F);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.tabs
+{
+  /* Modelo de Caja */
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.tab
+{
+  /* Modelo de Caja */
+  padding: 8px 12px;
+
+  /* Tipografía */
+  color: var(--color-fuente);
+
+  /* Visual */
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.tab.active
+{
+  /* Visual */
+  background: rgba(255,255,255,0.04);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  border-left: 3px solid var(--color-accento);
+}
+
+.tabcontent
+{
+  /* Modelo de Caja */
+  display: flex;
+  gap: 12px;
+  flex: 1;
+}
+
+.hidden
+{
+  /* Modelo de Caja */
+  display: none;
+}
+
+.panel
+{
+  /* Modelo de Caja */
+  min-height: 200px;
+  flex: 1;
+  padding: 12px;
+
+  /* Visual */
+  background: var(--color-panel-bg);
+  border-radius: 10px;
+  overflow: auto;
+}
+
+.small
+{
+  /* Modelo de Caja */
+  flex: 0 0 280px;
+}
+
+.logPanel
+{
+  /* Modelo de Caja */
+  height: 320px;
+  padding: 8px;
+
+  /* Tipografía */
+  font-family: var(--fuente-crono);
+
+  /* Visual */
+  background: rgba(0,0,0,0.5);
+  overflow: auto;
+}
+
+.momentItem
+{
+  /* Modelo de Caja */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+
+  /* Visual */
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.momentMeta
+{
+  /* Modelo de Caja */
+  display: flex;
+  flex-direction: column;
+}
+
+.momentActions button
+{
+  /* Modelo de Caja */
+  margin-left: 6px;
+}
+
+.footer
+{
+  /* Modelo de Caja */
+  padding: 6px 0;
+
+  /* Tipografía */
+  text-align: center;
+
+  /* Visual */
+  opacity: 0.7;
+}
+
+.statusBadge
+{
+  /* Modelo de Caja */
+  padding: 4px 8px;
+
+  /* Visual */
+  background:rgba(0,0,0,0.3);
+  border-radius:6px;
+}
+
+.indicator.green
+{
+  /* Modelo de Caja */
+  padding: 6px;
+
+  /* Visual */
+  background:linear-gradient(
+    90deg,
+    #66ff88,
+    #22cc66);
+  border-radius: 6px;
+}
+
+.indicator.red
+{
+  /* Modelo de Caja */
+  padding: 6px;
+
+  /* Visual */
+  background:linear-gradient(
+    90deg,
+    #ff8888,
+    #cc4444);
+  border-radius: 6px;
+}

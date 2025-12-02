@@ -1,0 +1,330 @@
+/*
+
+    🚀 TOY feliz 50 XAVY 👨‍🚀
+    
+    Estilos generales para VJ-MIX 
+    de Momentos de la fiesta
+
+    :: general.css
+    :: versión 8.3
+    :: 20 11 25
+    :: Javier Prior
+
+*/
+
+/*
+    INDICE
+
+    1 - VARIABLES GLOBALES Y ESTILOS DE BASE (🎨)
+    =================================================
+      - 1.1 - Variables Globales (Colores - Fuentes - Layers)
+      - 1.2 - Estilos de Base
+
+    2 - ESTILOS Y JERARQUÍAS TIPOGRÁFICAS ARMONIZADOS (📰)
+    =================================================
+      - 2.1 - Estilos Tipográficos
+      - 2.2 - Escala Tipográfica
+
+    3 - ESTRUCTURA CONSTRUCTIVA (🏠)
+    ==================================================
+      - 3.1 - 
+      - 3.2 -
+
+    4 - 
+
+
+*/
+
+/*
+    ( 1 )
+    ===============================================
+    🎨 VARIABLES GLOBALES Y ESTILOS DE BASE
+    ===============================================
+      - 1.1 - Variables Globales (Colores - Fuentes - Layers)
+      - 1.2 - Estilos de Base
+*/
+
+/*
+    (1.1)
+    ------------------------------------------------
+    Variables Globales (Colores - Fuentes - Layers)
+    ------------------------------------------------
+*/
+
+:root
+{
+    /* -- PALETA DE COLORES -- */
+    /* Gama de Colores Neutros */
+    --color-base-blanco:        #FFFFFF; 
+    --color-base-negro:         #000000;            /* Fondo Principal / Espacio Nocturno */
+    --color-base-hielo:         #EAF6FF;            /* Fondo suave / Texto Espacial */
+    --color-panel:              rgba(2,10,20,0.7);  /* UI */
+
+    /* Gama de Colores Fríos (Azules & Turquesas) */
+    --color-base-azul-indigo:   #0C007D;            /* Marca / Profundidad */
+    --color-azul-royal:         #0040FF;            /* Acción Principal */
+    --color-base-azul-cielo:    #00BFFF;            /* Marca y Buzz */
+    --color-base-cian-pastel:   #80DEEA;            /* Buzz / Detalles sutiles */
+    --color-turquesa:           #00FFBF;            /* Ciencia / Espacio */
+
+    /* Gama de Colores para Acentos (Violetas & Verdes) */
+    --color-base-violeta-deep:  #4A007D;            /* Buzz / Contraste oscuro */
+    --color-violeta-vivid:      #8A2BE2;            /* Magia / Energía */
+    --color-base-purpura:       #9C27B0;            /* Buzz / Tono medio vibrante */
+    --color-verde-neon:         #ADFF2F;            /* Radioactivo / Éxito */
+
+    /* Gama de Colores Cálidos (Fuego & Alerta) */
+    --color-base-amarillo-oro: #FFDE00;             /* Marca / Luz / Advertencia */
+    --color-base-naranja-red:  #FF4000;             /* Marca / Peligro */
+
+
+    /* -- TIPOGRAFIAS -- */
+    /* Fuentes Logotipo */
+    --fuente-logo-toy-50: 'Bangers', cursive;
+    --fuente-logo-feliz: 'Anton', sans-serif;
+
+    /* Fuente Textos */
+    --fuente-base: 'Roboto', sans-serif;
+
+    /* Fuente Espacial */
+    --fuente-comando: "Kode Mono", monospace;
+
+
+    /* -- CAPAS -- */
+    /* Capas Superiores */
+    --layer-10-infinito: 999999;    /* Títulos Momentos */
+    --layer-09-superior: 100;       /* Cubre pantalla - Fondo Momentos */
+    --layer-08-elevado: 90;         /* Logo y Hashtag */
+    --layer-07-alto: 80;            /* Dashboard y menú */  
+
+    /* Capas Intermedias */
+    --layer-06-intermedio: 70;      /* Encabezado y Pie */  
+    --layer-05-medio: 60;           /* Sin definir */
+    --layer-04-base: 50;            /* Contenido Superior - Player Front */
+    --layer-03-bajo: 40;            /* Contenido Inferior - Player Back */
+
+    /* Capas Inferiores */
+    --layer-02-inferior: 10;        /* sin definir */
+    --layer-01-fondo: -1;           /* sin definir */
+    --layer-00-sotano: -10;         /* sin definir */
+}
+
+
+/* (1.2)
+    -------------------------------------------
+    Estilos de Base (Orden P, M, T, V)
+    -------------------------------------------
+*/
+
+html  
+{
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía (N/A) */
+    /* Visual */
+    scroll-behavior: smooth;
+}
+
+body
+{
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja */
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+    /* Tipografía */
+    font-family: var(--fuente-base);
+    font-size: 10px; /* Base para rem */
+    line-height: 1.6;
+    color: var(--color-base-hielo);
+
+    /* Visual */
+    background-color: var(--color-base-negro);
+    cursor: default;
+}
+
+.visible  
+{
+    /* Posicionamiento */
+    z-index: var(--layer-05-medio);
+
+    /* Modelo de Caja (N/A) */
+    /* Tipografía (N/A) */
+    /* Visual */
+    opacity: 1;
+    visibility: visible;
+}
+
+.hidden  
+{
+    /* Posicionamiento */
+    z-index: var(--layer-04-base);
+
+    /* Modelo de Caja (N/A) */
+    /* Tipografía (N/A) */
+    /* Visual */
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Enlaces base */
+a {
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía */
+    color: var(--color-turquesa);
+    text-decoration: none;
+    /* Visual */
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía */
+    color: var(--color-verde-neon);
+    /* Visual (N/A) */
+}
+
+
+/* ( 2 )
+    =================================================
+    📰 ESTILOS Y JERARQUÍAS TIPOGRÁFICAS ARMONIZADOS
+    =================================================
+      - 2.1 - Estilos Tipográficos
+      - 2.2 - Escala Tipográfica
+*/
+
+/* (2.1)
+    -------------------------------------------
+    Estilos Tipográficos
+    -----------------------------------------
+*/
+
+    /* -- TÍTULOS -- */
+#moment-title,
+#insignia-title,
+#start-overlay,
+.titular,
+.selector-menu h2
+{
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía */
+    font-family: var(--fuente-logo-toy-50);
+    color: var(--color-base-amarillo-oro);
+    text-align: center;
+    line-height: 1.1;
+    /* Visual (N/A) */
+}
+
+
+    /* -- MARCA -- */
+.logo-toy-50
+{
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía */
+    font-family: var(--fuente-logo-toy-50);
+    color: var(--color-base-amarillo-oro);
+    /* Visual */
+    text-shadow: 
+      2px 2px 0px var(--color-base-azul-indigo), 
+      -2px -2px 0px var(--color-base-azul-indigo), 
+      2px -2px 0px var(--color-base-azul-indigo), 
+      -2px 2px 0px var(--color-base-azul-indigo);
+}
+
+.logo-feliz  
+{
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía */
+    font-family: var(--fuente-logo-feliz);
+    color: var(--color-base-amarillo-oro);
+    letter-spacing: 2px;
+    /* Visual */
+    transform: scaleY(0.4);
+}
+
+
+    /* -- COMANDO ESTELAR -- */
+.insignia,
+.clock
+{
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía */
+    font-family: var(--fuente-comando);
+    /* Visual (N/A) */
+}
+
+
+/* (2.2)
+    -------------------------------------------
+    Escala Tipográfica (rem)
+    -------------------------------------------
+*/
+
+    /* Nivel 1: Título de Máximo Impacto (160px) */
+#moment-title
+{
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía */
+    font-size: 16rem;
+    font-weight: 800;
+    /* Visual (N/A) */
+}
+
+    /* Nivel 2: Títulos Principales (80px) */
+#start-overlay
+{
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía */
+    font-size: 8rem;
+    font-weight: 800;  
+    /* Visual (N/A) */
+}
+
+    /* Nivel 3: Títulos Secundarios (60px) */
+.hashtag
+{
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía */
+    font-size: 6rem;
+    font-weight: 800;
+    /* Visual (N/A) */
+}
+
+    /* Nivel 4: Títulos Secciones (40px) */
+.selector-menu h2
+{
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía */
+    font-size: 4rem;
+    /* Visual (N/A) */
+}
+
+    /* Nivel 5: Titulares (20px) */
+.menu-button
+{
+    /* Posicionamiento (N/A) */
+    /* Modelo de Caja (N/A) */
+    /* Tipografía */
+    font-size: 2rem;
+    /* Visual (N/A) */
+}
+
+
+/* ( 3 )
+    ==============================================
+    🏠 Estructura Constructiva
+    ==============================================
+*/

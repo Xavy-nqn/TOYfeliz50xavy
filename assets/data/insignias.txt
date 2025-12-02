@@ -1,0 +1,23 @@
+1|Trabajo de Colección|Categoría Fidelidad y Esfuerzo|Mejor Fiel al Original / Mejor Logrado|el disfraz más reconocible, con mejor calidad de materiales o más apegado al diseño de la saga.
+2|¡Hay una Serpiente en Mi Bota!|Categoría Humor y Rol|Mejor Actuación / Personaje que mejor interpreta su rol|haber logrado el mejor acento, la postura o la frase célebre de su personaje toda la noche.
+3|Yo Soy Tu Amigo Fiel|Categoría Grupo y Logística|Mejor Dúo / Pareja Temática|haber sido la combinación perfecta.
+4|Yo Soy Tu Amigo Fiel|Categoría Grupo y Logística|Mejor Dúo / Pareja Temática|haber sido la combinación perfecta.
+5|Fuera de serie|Categoría Sin Disfraz|Reconocimiento a la Libertad / Mejor Ropa de Verano|haber aceptado la misión de venir a divertirse cómodo y libre, aunque sin disfraz, pero con la mejor actitud y la ropa más cómoda y cool.
+6|Más Valiente|Categoría Valor y Actitud|Mejor Debut / Actitud al Micrófono|haberse atrevido a cantar con más entusiasmo, sin importar si desafinó. ¡El coraje de un verdadero vaquero!
+7|Artista Revelación|Categoría Repertorio y Humor|La Mejor Voz / Técnica Vocal|haber sorprendido con su voz increíble.
+8|Dúo Estelar|Categoría Grupo y Logística|Mejor Dúo de Karaoke|haber logrado la mejor coordinación y química actoral coral grupal.
+9|Dúo Estelar|Categoría Grupo y Logística|Mejor Dúo de Karaoke|haber logrado la mejor coordinación y química actoral coral grupal.
+10|La Garra Musical|Categoría Grupo y Logística|Mejor Coro del Público|haber interpretado la canción en la que todos hicimos coros, córeos y aplausos.
+11|Lluvia de Estrellas|Categoría Esfuerzo y Sincronización|Mejor Sincronización Coreográfica Grupal|haber exhibido la mejor coordinación grupal de principio a fin.
+12|Lluvia de Estrellas|Categoría Esfuerzo y Sincronización|Mejor Sincronización Coreográfica Grupal|haber exhibido la mejor coordinación grupal de principio a fin.
+13|Lluvia de Estrellas|Categoría Esfuerzo y Sincronización|Mejor Sincronización Coreográfica Grupal|haber exhibido la mejor coordinación grupal de principio a fin.
+14|El Esfuerzo de Rex|Categoría Esfuerzo y Sincronización|La Coreografía Más Difícil o Ambiciosa|el valor de intentar los pasos más complejos o físicamente exigentes, aunque la ejecución haya sido algo caótica y graciosa.
+15|El Esfuerzo de Rex|Categoría Esfuerzo y Sincronización|La Coreografía Más Difícil o Ambiciosa|el valor de intentar los pasos más complejos o físicamente exigentes, aunque la ejecución haya sido algo caótica y graciosa.
+16|El Esfuerzo de Rex|Categoría Esfuerzo y Sincronización|La Coreografía Más Difícil o Ambiciosa|el valor de intentar los pasos más complejos o físicamente exigentes, aunque la ejecución haya sido algo caótica y graciosa.
+17|La Coreo Épica|Categoría Esfuerzo y Sincronización|Mejor Elección Musical que Invita a Bailar|haber elegido la canción que mejor levantó el ánimo y logró que todos se sumen a bailar.
+18|La Coreo Épica|Categoría Esfuerzo y Sincronización|Mejor Elección Musical que Invita a Bailar|haber elegido la canción que mejor levantó el ánimo y logró que todos se sumen a bailar.
+19|La Coreo Épica|Categoría Esfuerzo y Sincronización|Mejor Elección Musical que Invita a Bailar|haber elegido la canción que mejor levantó el ánimo y logró que todos se sumen a bailar.
+20|Juguete Desarmado|Categoría Creatividad y Humor|La Coreografía Más Hilarante / Absurda|el baile más desordenado, lleno de fallos intencionados y que simplemente generó más risa en todos.
+21|Juguete Desarmado|Categoría Creatividad y Humor|La Coreografía Más Hilarante / Absurda|el baile más desordenado, lleno de fallos intencionados y que simplemente generó más risa en todos.
+22|Juguete Desarmado|Categoría Creatividad y Humor|La Coreografía Más Hilarante / Absurda|el baile más desordenado, lleno de fallos intencionados y que simplemente generó más risa en todos.
+23|Condecoración Galáctica Mayor|Categoría Super Insignia|Máximo reconocimiento de la Alianza Intergaláctica|haber obtenido la mayor cantidad de insignias durante la misión.

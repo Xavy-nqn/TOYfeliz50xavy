@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>🚀 TOY feliz 50 XAVY 👨‍🚀 - Panel Operador VJ-MIX</title>
+
+    <meta name="author" content="JAVIER PRIOR">
+    <meta name="keywords" content="Versión 8.1 TOYfeliz50XAVY">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers:wght@400..700&family=Roboto:wght@400..700&family=Anton:wght@300..700&family=Kode+Mono:wght@400..700&display=swap">
+
+    <link rel="stylesheet" href="assets/css/general.css">
+    <link rel="stylesheet" href="assets/css/operador.css">
+  </head>
+
+  <body id="operador">
+    <header class="operador header"></header>
+
+    <overlay class="operador overlayer"></overlay>
+
+    <main class="operador dashboard main">
+    
+      <header class="topbar">
+        <div class="title">Panel de Operador</div>
+        <div class="clock" id="clock">UTC-3 00:00</div>
+        <button id="openShowBtn" class="btn">Abrir pantalla de salida</button>
+        <button id="startAutoSchedule" class="btn">Auto-schedule ON</button>
+      </header>
+
+      <nav class="tabs">
+        <button class="tab active" data-tab="mission">Misión</button>
+        <button class="tab" data-tab="audio">Audio</button>
+        <button class="tab" data-tab="logs">Logs</button>
+      </nav>
+
+      <section class="operador tabcontent" id="mission">
+        <div id="momentsList" class="panel"></div>
+        <div class="panel small" id="syncInfo">
+          <div>Conexión: <span id="connStatus">Desconocida</span></div>
+          <div>Show window: <span id="showWindowState">Cerrada</span></div>
+        </div>
+      </section>
+
+      <section class="operador tabcontent hidden" id="audio">
+        <div class="panel">
+          <label>Volumen Maestro <input id="masterVol" type="range" min="0" max="100" value="100"></label>
+          <div>Vol A: <span id="volA">100</span> | Vol B: <span id="volB">0</span></div>
+          <button id="muteAll" class="btn">Mute All</button>
+        </div>
+      </section>
+
+      <section class="operador tabcontent hidden" id="logs">
+        <div class="panel logPanel" id="logPanel"></div>
+      </section>
+    </main>
+
+    <footer class="operador footer">
+      <div class="hashtag">
+        <span class="font-toy-50">#TOY</span>
+
+        <span class="fondo-feliz">
+          <span class="font-feliz">FELIZ</span>
+        </span>
+
+        <span class="font-toy-50">50</span>
+      </div>
+    </footer>
+
+    <!-- hidden audio alerts -->
+    <div style="display:none;" id="audio-alerts">
+      <audio id="sfx-confirm" src="assets/sfx/beep-confirm.mp3"></audio>
+      <audio id="sfx-warning" src="assets/sfx/beep-warning.mp3"></audio>
+      <audio id="sfx-error" src="assets/sfx/beep-error.mp3"></audio>
+    </div>
+
+    <script src="assets/js/operador-soporte.js"></script>
+    <script src="assets/js/operador.js"></script>
+    <script src="assets/js/audio-alerts.js"></script>
+  </body>
+</html>

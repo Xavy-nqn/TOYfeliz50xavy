@@ -1,0 +1,583 @@
+/*
+
+  🚀TOY feliz 50 XAVY
+  Estilos generales para VJ de Momentos de la fiesta
+  
+  :: TOYfeliz50XAVY_show.css
+  :: versión 8.1
+  :: 14 11 25
+  :: Javier Prior
+
+*/
+
+/* 
+  ( 1 )
+  ==============================================
+  🎨 Variables globales
+  ==============================================
+                                                  */
+
+:root
+{
+    /* Colores Buzz Lightyear/Toy Story */
+    --color-buzz-violeta: #4A007D; 
+    --color-buzz-azul: #00BFFF; 
+    --color-buzz-verde: #00FFBF; 
+    --color-buzz-rojo: #FF0000; 
+    --color-buzz-blanco: #FFFFFF; 
+    --color-buzz-negro: #000000; 
+
+    /* Colores Logo/Destacados */
+    --color-logo-azul: #0C007D; 
+    --color-logo-amarillo: #FFDE00; 
+    --color-logo-naranja: #FF4000; 
+
+    /* Colores Destacados/UI */
+    --color-destacado-verde: #ADFF2F; 
+    --color-destacado-violeta:#8A2BE2; 
+    --color-destacado-magenta: #7D0071; 
+    --color-destacado-azul: #0040FF; 
+    --color-destacado-amarillo: #FFFF00; 
+
+    /* Tipografía */
+    --fuente-titulos: 'Bangers', cursive;
+    --fuente-base: 'Roboto', sans-serif;
+    --fuente-crono: "Kode Mono", monospace;
+}
+
+
+/* (1.1)
+-------------------------------------------
+Estilos Globales
+-------------------------------------------
+*/
+
+body,
+html
+{
+    /* Modelo de Caja */
+    margin: 0;
+    padding: 0;
+    font-size: 10px; /* Base para rem */
+
+    /* Tipografía */
+    font-family: var(--fuente-base);
+    color: var(--color-buzz-blanco);
+    text-align: center;
+
+    /* Visual */
+    background-color: var(--color-buzz-negro);
+    overflow: hidden;
+    cursor: none;
+}
+
+
+/* ( 2 )
+==============================================
+📰 Jerarquías Tipográficas Armonizadas
+==============================================
+*/
+
+/* (2.1)
+-------------------------------------------
+Estilos Tipográficos
+-----------------------------------------
+*/
+
+/* -- TÍTULOS -- */
+#moment-title,
+#start-overlay,
+.hashtag,
+.selector-menu h2
+{
+    /* Tipografía */
+    font-family: var(--fuente-titulos);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--color-logo-amarillo);
+}
+
+
+/* (2.2)
+-------------------------------------------
+Escala Tipográfica (rem)
+-------------------------------------------
+*/
+
+/* Nivel 1: Título de Máximo Impacto (160px) */
+#moment-title
+{
+    font-size: 16rem;
+}
+
+/* Nivel 2: Títulos Principales (80px) */
+#start-overlay
+{
+    font-size: 8rem;
+}
+
+/* Nivel 3: Títulos Secundarios (60px) */
+.hashtag
+{
+    font-size: 6rem;
+}
+
+/* Nivel 4: Títulos Secciones (40px) */
+.selector-menu h2
+{
+    font-size: 4rem;
+}
+
+/* Nivel 5: Titulares (20px) */
+.menu-button
+{
+    font-size: 2rem;
+}
+
+
+/* ( 3 )
+==============================================
+🏠 Estructura Constructiva
+==============================================
+*/
+
+/* (3.1)
+-------------------------------------------
+Contenedor Principal y Fondo
+-------------------------------------------
+*/
+
+/* -- CONTENEDOR PRINCIPAL -- */
+#player-container
+{
+    /* Posicionamiento */
+    position: relative;
+    top: 0;
+    left: 0;
+
+    /* Modelo de Caja */
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
+    /* Visual */
+    background: linear-gradient(
+        135deg,
+        var(--color-buzz-violeta) 0%,
+        var(--color-destacado-violeta) 100%);
+}
+
+
+/* --- REPRODUCTORES DE VIDEO (APLICADO A AMBOS DECKS) --- */
+#player-a, #player-b /* ! IMPORTANTE: Selectores múltiples */
+{
+    /* Posicionamiento */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5; /* Z-index inicial bajo */
+
+    /* Modelo de Caja (Aspect Ratio Cover) */
+    min-width: 100vw;
+    min-height: 56.25vw;
+    min-width: 177.78vh;
+    min-height: 100vh;
+
+    /* Visual */
+    opacity: 1;
+    transition: opacity 1.5s ease-in-out; /* Para la mezcla visual */
+}
+
+/* --- CLASE DE MEZCLA (Se aplica al deck que está desapareciendo) --- */
+#player-a.mixing, #player-b.mixing {
+    opacity: 0; /* Hacemos el fade-out visual */
+}
+
+
+/* (3.2)
+-------------------------------------------
+Interfaz Gráfica
+-------------------------------------------
+*/
+
+/* -- CONTENEDOR DE GRÁFICOS -- */
+#overlay-graphics
+{
+    /* Posicionamiento */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    /* Modelo de Caja */
+    width: 100vw;
+    height: 100vh;
+
+    /* Visual */
+    pointer-events: none; 
+}
+
+
+/* -- ENCABEZADO -- */
+#Top
+{
+    /* Posicionamiento */
+    position: absolute; 
+    top: 0;
+    left: 0;
+    z-index: 16; /* CRÍTICO: Máxima jerarquía (por encima del Footer 15) */
+
+    /* Modelo de Caja */
+    width: 100vw; 
+    height: 12vh;
+}
+
+/* Barra encabezado */
+.barra-top
+{
+    /* Posicionamiento */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 15; /* Base del encabezado */
+
+    /* Modelo de Caja */
+    width: 100%;
+    height: 100%;
+
+    /* Visual */
+    background: var(--color-destacado-verde);
+}
+
+/* Logo de la fiesta */
+.party-logo
+{
+    /* Posicionamiento */
+    position: absolute;
+    top: 12vh; 
+    left: 20px;
+    transform: translateY(-50%); 
+    z-index: 20; /* Por encima de la barra */
+
+    /* Modelo de Caja */
+    width: 450px;
+
+    /* Visual */
+    opacity: 1;
+}
+
+
+/* -- PIE -- */
+#Footer
+{
+    /* Posicionamiento */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 15; /* CRÍTICO: Por debajo del encabezado (16) */
+
+    /* Modelo de Caja */
+    width: 100vw;
+    height: 10vh;
+
+    /* Visual */
+    pointer-events: none;
+}
+
+/* Hashtag de la fiesta */
+.hashtag
+{
+    /* Posicionamiento */
+    position: absolute;
+    bottom: 20px;
+    right: 50px;
+    z-index: 20;
+
+    /* Visual */
+    text-shadow: 
+        3px 3px 0px #0000AA, 
+        -3px -3px 0px #0000AA, 
+        3px -3px 0px #0000AA, 
+        -3px 3px 0px #0000AA, 
+        4px 4px 5px rgba(0,0,0,0.5);
+
+    /* Animación */
+    animation: hashtag-glow 3s infinite ease-in-out;
+}
+
+/* Animación del Hashtag*/
+@keyframes hashtag-glow
+{
+    0%, 100%
+    {
+        text-shadow: 
+            3px 3px 0px #0000AA, 
+            -3px -3px 0px #0000AA, 
+            3px -3px 0px #0000AA, 
+            -3px 3px 0px #0000AA, 
+            4px 4px 5px rgba(0,0,0,0.5); 
+    }
+
+    50%
+    {
+        text-shadow: 
+            3px 3px 0px var(--color-destacado-violeta), 
+            -3px -3px 0px var(--color-destacado-violeta), 
+            3px -3px 0px var(--color-destacado-violeta), 
+            -3px 3px 0px var(--color-destacado-violeta), 
+            0 0 25px var(--color-buzz-blanco), 
+            4px 4px 10px rgba(0,0,0,0.5); 
+    }
+}
+
+/* Barras Música */
+.visualizer-container
+{
+    /* Posicionamiento */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 16; /* Por encima del Footer (15) */
+
+    /* Modelo de Caja */
+    width: 100vw;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 1%;
+    box-sizing: border-box;
+
+    /* Visual */
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.visualizer-bar
+{
+    /* Modelo de Caja */
+    width: 0.8%;
+    margin: 0 1px;
+
+    /* Visual */
+    background: linear-gradient(
+        to top,
+        var(--color-buzz-violeta),
+        var(--color-destacado-verde));
+    
+    /* Animación */
+    animation: visualize 1s ease-out infinite alternate;
+}
+
+/* Animación Barras Música */
+@keyframes visualize
+{
+    0%
+    {
+        height: 10%;
+    }
+
+    50%
+    {
+        height: 80%;
+    }
+
+    100%
+    {
+        height: 30%;
+    }
+}
+
+
+/* -- TRANSICIÓN "WARP" -- */
+#warp-overlay
+{
+    /* Posicionamiento */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    /* Modelo de Caja */
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+
+    /* Visual */
+    background: radial-gradient(
+        circle,
+        var(--color-buzz-blanco) 0%,
+        var(--color-buzz-violeta) 60%,
+        var(--color-buzz-negro) 100%);
+    opacity: 0;
+    transform: scale(0);
+
+    /* Animación */
+    transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+#warp-overlay.active
+{
+    opacity: 1;
+    transform: scale(3);
+    border-radius: 0;
+}
+
+
+/* -- TÍTULO DEL MOMENTO -- */
+#moment-title
+{
+    /* Posicionamiento */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50;
+
+    /* Visual */
+    text-shadow: 
+        5px 5px 0px #0000AA, 
+        -5px -5px 0px #0000AA, 
+        5px -5px 0px #0000AA, 
+        -5px 5px 0px #0000AA, 
+        8px 8px 10px rgba(0,0,0,0.5);
+    opacity: 0;
+    pointer-events: none;
+
+    /* Animación */
+    transition: opacity 0.5s ease-in-out;
+}
+
+#moment-title.visible
+{
+    opacity: 1;
+}
+
+
+/* -- PANTALLA DE INICIO -- */
+#start-overlay
+{
+    /* Posicionamiento */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+
+    /* Modelo de Caja */
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Visual */
+    background: radial-gradient(
+        circle,
+        var(--color-buzz-violeta) 0%,
+        var(--color-buzz-negro) 100%);
+    text-shadow: 
+        3px 3px 0px #0000AA, 
+        -3px -3px 0px #0000AA, 
+        3px -3px 0px #0000AA, 
+        -3px 3px 0px #0000AA, 
+        4px 4px 5px rgba(0,0,0,0.5);
+    cursor: pointer;
+    opacity: 1;
+
+    /* Animación */
+    transition: opacity 0.5s ease-out;
+}
+
+
+/* -- MENÚ INTERACTIVO (KARAOKE/COREO) -- */
+.selector-menu
+{
+    /* Posicionamiento */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    
+    /* Modelo de Caja */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+
+    /* Visual */
+    background: rgba(12, 0, 125, 0.95);
+    color: var(--color-buzz-blanco);
+    cursor: pointer;
+    pointer-events: visible;
+
+
+    /* Estado inicial: Oculto */
+    opacity: 0;
+    visibility: hidden;
+
+    /* Animación */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.selector-menu.active
+{
+    opacity: 1;
+    visibility: visible;
+}
+
+.selector-menu h2
+{
+    /* Tipografía */
+    margin-bottom: 40px;
+    
+    /* Visual */
+    text-shadow: 0 0 10px var(--color-buzz-azul);
+}
+
+.video-list-container
+{
+    /* Modelo de Caja */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 80%;
+    max-width: 600px;
+    max-height: 70%;
+    overflow-y: auto;
+}
+
+.menu-button
+{
+    /* Modelo de Caja */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 3px solid var(--color-logo-amarillo);
+    border-radius: 8px;
+    
+    /* Visual */
+    background-color: var(--color-destacado-azul);
+    color: var(--color-buzz-blanco);
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    /* Animación */
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.menu-button:hover
+{
+    color: var(--color-logo-amarillo);
+    font-weight: 600;
+    background-color: var(--color-destacado-magenta);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
